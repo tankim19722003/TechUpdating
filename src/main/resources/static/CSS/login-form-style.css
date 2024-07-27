@@ -1,0 +1,109 @@
+* {
+    box-sizing:border-box;
+    font-size:16px;
+    margin:0;
+    padding:0;
+}
+
+.hide {
+    display:none;
+}
+
+.show {
+    display:block;
+}
+
+
+.pass-show-hide-icon{
+    width:20px;
+}
+
+.error {
+    color: red;
+    font-size: 0.9rem;
+    padding: 0px 8px;
+}
+
+.error-wrap_header,
+.error-wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.error-wrap_header {
+    justify-content:center;
+}
+
+.error-icon {
+    width:15px;
+}
+
+.header {
+    padding: 8px 20px;
+}
+.form-wrap {
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index:1;
+}
+
+.logo-wrap {
+    flex-grow:1;
+}
+
+
+.pass-show-hide-icon{
+    top: calc(50% - 10px);
+    position: absolute;
+    right: 10px;
+    cursor:pointer
+}
+
+.login-form_wrap {
+    flex-grow:2;
+    justify-items:flex-start
+}
+.login-form {
+    padding: 15px;
+    width: 340px;
+    max-width:100%;
+    border:1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    height: 420px;
+    max-height: 100%;
+    border-radius: 6px;
+    justify-content:center;
+}
+
+.password-wrap,
+.input-wrap{
+    margin:4px 0px;
+    position:relative;
+}
+.input {
+    height: 30px;
+    border: 1px solid #ccc;
+    padding: 8px 14px;
+    border-radius: 4px;
+    margin: 10px 0px;
+    font-size:0.8rem;
+    width:100%;
+}
+
+
+.login-form_btn {
+    border-radius: 18px;
+    border: none;
+    padding: 8px 0px;
+    margin-top: 30px;
+    background: linear-gradient(to left, #DF38F7,#5CCBDC);
+    cursor:pointer;
+}

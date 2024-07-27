@@ -11,4 +11,6 @@ public interface RoleRepository extends JpaRepository<Role, Integer> {
             + "JOIN FETCH r.users "
             + "WHERE r.id= :id")
     Role findUserByIdWithJoinFetch(@Param("id") int id);
+
+//    Role findByUserId(int userId);
 }

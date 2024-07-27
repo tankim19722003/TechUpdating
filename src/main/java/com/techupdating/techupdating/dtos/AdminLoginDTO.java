@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserLoginDTO {
+public class AdminLoginDTO {
 
     @NotNull(message = "Account can not be empty")
     private String account;

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/login-form-style.css}">
+    <title>Login admin</title>
+</head>
+<body>
+
+    <div class="form-wrap">
+
+        <div class="logo-wrap">
+            <a  th:href="@{https://www.google.com/}" class="header">
+                <img th:src="@{/images/logo.png}" style="cursor:pointer" class="header_image" onclick = "moveToHomePage()">
+            </a>
+        </div>
+        <div class="login-form_wrap">
+
+            <form class="login-form" th:action="@{/api/v1/dev_updating/admin/processAdminForm}" th:object="${adminLoginDTO}" method="POST">
+                <h3 style="text-align:center; font-size: 1.8rem; margin-bottom:20px">Login Admin</h3>
+                <div th:if="${errorMessage}" class="error-wrap_header">
+                    <img th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
+                    <span
+                            th:text="${errorMessage}"
+                            class="error"></span>
+                </div>
+                <div class="account-wrap">
+                    <input type="text" th:field="*{account}" placeholder="User Account" class="login-form_user-account-input input"/>
+                    <!-- check account error--->
+                    <div class="error-wrap">
+                        <img th:if="${#fields.hasErrors('account')}" th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
+                        <span th:errors="*{account}"
+                              class="error"></span>
+                    </div>
+                </div>
+
+                <div class="password-wrap">
+                    <input type="password" th:field="*{password}" placeholder="Password" class="login-form_password-input input"/>
+                    <!-- check password error--->
+                    <div class="error-wrap" th:if="${#fields.hasErrors('password')}">
+                        <img th:src="@{/images/mark.png}"
+                             class="error-icon">
+                        <span
+                                th:errors="*{password}"
+                                class="error"></span>
+                    </div>
+
+                    <img th:src="@{/images/view.png}" class="pass-show-hide-icon show-password">
+                    <img th:src="@{/images/hide.png}" class="pass-show-hide-icon hide-password hide">
+                </div>
+
+                <button type="submit" class="login-form_btn">Đăng nhập</button>
+            </form>
+
+        </div>
+
+    </div>
+</body>
+
+<script>
+    let showPasswordBtn = document.querySelector(".show-password");
+    let hidePasswordBtn = document.querySelector(".hide-password");
+    let passwordInput = document.querySelector(".login-form_password-input");
+    showPasswordBtn.onclick = function() {
+        hidePasswordBtn.classList.add("show");
+        showPasswordBtn.classList.add("hide");
+
+        passwordInput.type = "text";
+    }
+
+     hidePasswordBtn.onclick = function() {
+        hidePasswordBtn.classList.remove("show");
+        showPasswordBtn.classList.remove("hide");
+
+        passwordInput.type = "password";
+    }
+
+    // redirect to google
+
+   function moveToHomePage() {
+        alert("Hello");
+    }
+</script>
+</html>

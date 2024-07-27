@@ -77,8 +77,12 @@ CREATE TABLE image (
 );
 
 
-// remove colum enable
+-- remove colum enable
 alter table user drop column enable;
+
+
+-- remove birthdate in user
+ALTER TABLE user DROP COLUMN birthdate;
 
 
 

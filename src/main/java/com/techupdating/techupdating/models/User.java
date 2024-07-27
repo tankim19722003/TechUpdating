@@ -2,6 +2,7 @@ package com.techupdating.techupdating.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
 @Table(name = "user")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User {
 
     @Id
@@ -29,10 +31,9 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name ="birthdate")
-    private Date birthdate;
 
     @ManyToOne(
+            fetch = FetchType.EAGER,
             cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}
     )
     @JoinColumn(name = "role_id")
@@ -78,13 +79,6 @@ public class User {
         this.email = email;
     }
 
-    public Date getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
-    }
 
     public Role getRole() {
         return role;
@@ -102,7 +96,6 @@ public class User {
                 ", account='" + account + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", birthdate=" + birthdate +
                 '}';
     }
 }

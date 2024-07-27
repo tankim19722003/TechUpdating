@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/register.css}">
+</head>
+<body>
+    <a  th:href="@{/api/v1/dev_updating/login}" class="header">
+        <span style="font-size:30px; font-weight:bold">D</span>
+        <span>Java</span>
+    </a>
+
+    <div class="form-wrap">
+        <form class="form-register" th:action="@{/api/v1/dev_updating/processRegisterForm}" method="post" th:object="${userRegisterDTO}">
+            <h1 style="text-align:center; font-size:1.4rem;margin-bottom: 10px;">Register</h1>
+           <div th:if="${errorMessage}" class="error-wrap">
+               <img th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
+                <span
+                      th:text="${errorMessage}"
+                      class="error"></span>
+           </div>
+
+            <div class="input-wrap">
+                <div class="input-wrap_fullname">
+                    <input th:field="*{fullname}" class="input" type="text" placeholder="Họ và tên">
+
+                    <!--error hanling-->
+                    <div class="error-wrap">
+                        <img th:if="${#fields.hasErrors('fullname')}" th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
+                        <span th:if="${#fields.hasErrors('fullname')}"
+                              th:errors="*{fullname}"
+                              class="error"></span>
+                    </div>
+                </div>
+
+                <div class="input-wrap_account">
+                    <input th:field="*{account}" class="input" type="text" placeholder="Tài khoản">
+
+                    <!--error hanling-->
+                    <div class="error-wrap">
+                        <img th:if="${#fields.hasErrors('account')}" th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
+                        <span th:if="${#fields.hasErrors('account')}"
+                              th:errors="*{account}"
+                              class="error"></span>
+                    </div>
+                </div>
+
+                <div class="input-wrap_password">
+                    <input th:field="*{password}" class="input" type="password" placeholder="Mật khẩu">
+
+                    <!--error handling-->
+                    <div class="error-wrap">
+                        <img th:if="${#fields.hasErrors('password')}" th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
+                        <span th:if="${#fields.hasErrors('password')}"
+                              th:errors="*{password}"
+                              class="error"></span>
+                    </div>
+                </div>
+
+                <div class="input-wrap_retype-password">
+                    <input th:field="*{retypePassword}" class="input" type="password" placeholder="Nhập lại mật khẩu">
+
+                    <!--error handling-->
+                    <div class="error-wrap">
+                        <img th:if="${#fields.hasErrors('retypePassword')}" th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
+                        <span th:if="${#fields.hasErrors('retypePassword')}"
+                              th:errors="*{retypePassword}"
+                              class="error"></span>
+                    </div>
+                </div>
+
+                <div class="input-wrap_email">
+                    <input th:field="*{email}" class="input" type="text" placeholder="Email">
+
+                    <!--error hanling-->
+                    <div class="error-wrap">
+                        <img th:if="${#fields.hasErrors('email')}" th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
+                        <span th:if="${#fields.hasErrors('email')}"
+                              th:errors="*{email}"
+                              class="error"></span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="btn-wrap">
+                <a th:href="@{/api/v1/dev_updating/login}" class="btn" id="login-btn">Đăng nhập</a>
+                <button type="submit" class="btn" id="register-btn">Đăng kí</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
