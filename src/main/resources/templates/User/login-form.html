@@ -21,7 +21,7 @@
                         class="error"></span>
             </div>
             <div class="account-wrap">
-                <input type="text" th:field="*{account}" placeholder="User Account" class="login-form_user-account-input input"/>
+                <input type="text" name="account" th:field="*{account}" placeholder="User Account" class="login-form_user-account-input input"/>
                 <!-- check account error--->
                 <div class="error-wrap">
                     <img th:if="${#fields.hasErrors('account')}" th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
@@ -31,7 +31,7 @@
             </div>
 
             <div class="password-wrap">
-                <input type="password" th:field="*{password}" placeholder="Password" class="login-form_password-input input"/>
+                <input type="password" name="password" th:field="*{password}" placeholder="Password" class="login-form_password-input input"/>
                 <!-- check password error--->
                 <div class="error-wrap" th:if="${#fields.hasErrors('password')}">
                     <img th:src="@{/images/mark.png}"
@@ -40,6 +40,10 @@
                             th:errors="*{password}"
                             class="error"></span>
                 </div>
+            </div>
+
+            <div class="password-wrap">
+                <input type="text" name="emailCode" th:field="*{emailCode}" placeholder="Email code" class="login-form_password-input input"/>
             </div>
 
 

@@ -1,6 +1,7 @@
 package com.techupdating.techupdating;
 
 import com.techupdating.techupdating.Services.UserService;
+import com.techupdating.techupdating.configurations.CustomUserDetailsService;
 import com.techupdating.techupdating.configurations.EmailServiceImpl;
 import com.techupdating.techupdating.dtos.AdminLoginDTO;
 import com.techupdating.techupdating.dtos.UserLoginDTO;
@@ -26,11 +27,20 @@ public class TechupdatingApplication {
 			RoleRepository roleRepository,
 			UserRepository userRepository,
 			UserService userService,
-			EmailServiceImpl emailService
+			EmailServiceImpl emailService,
+			CustomUserDetailsService customUserDetailsService
 	) {
 		return runner -> {
-			sendEmail(emailService);
+			UserDetail(customUserDetailsService);
+//			sendEmail(emailService);
+//			createUser(roleRepository, userRepository);
 		};
+	}
+
+	private void UserDetail(CustomUserDetailsService customUserDetailsService) {
+		String account = "tuankiet123";
+		customUserDetailsService.loadUserByUsername(account);
+
 	}
 
 	private void sendEmail(EmailServiceImpl emailService) {
@@ -91,9 +101,8 @@ public class TechupdatingApplication {
 	}
 
 	private void findRoleWithJoinFetch(RoleRepository roleRepository) {
-		Role role = roleRepository.findUserByIdWithJoinFetch(1);
-		System.out.println(role.getUsers());
-		System.out.println(role);
+//		Role role = roleRepository.findUserByIdWithJoinFetch(1);
+//		System.out.println(role);
 	}
 
 	private void findUserById(UserRepository userRepository) {
@@ -106,13 +115,11 @@ public class TechupdatingApplication {
 		);
 		System.out.println(user);
 
-		System.out.println("Role: " + user.getRole());
 
 
 	}
 	private void createRole(RoleRepository roleRepository, UserRepository userRepository) {
 		Role role = new Role();
-		role.setName("User");
 
 		role = roleRepository.save(role);
 		System.out.println(role);
@@ -129,14 +136,7 @@ public class TechupdatingApplication {
 		user.setId(1);
 		user.setPassword("ljfndsfjs");
 		user.setFullname("Kim Ngoc Tan");
-
-		
-		// set role for user
-		int roleId = 1;
-		Role role = roleRepository.findById(roleId).orElseThrow(
-				() ->  new RuntimeException("User does not exist")
-		);
-		user.setRole(role);
+		user.setEnabled(true);
 
 		// saving user
 		System.out.println("Saving user");

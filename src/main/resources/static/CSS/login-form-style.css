@@ -107,3 +107,7 @@
     background: linear-gradient(to left, #DF38F7,#5CCBDC);
     cursor:pointer;
 }
+
+.test {
+    font-size:100px;
+}

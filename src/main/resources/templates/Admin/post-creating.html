@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/common-css.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/style-for-post.css}">
+    <title>Đăng bài viết</title>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-wrap">
+            <img th:src="@{/images/logo.png}" class="logo_image">
+        </div>
+        <div class="user-wrap">
+            <img th:src="@{/images/user.png}" class="avatar">
+            <div class="user-info-wrap">
+                <span>tankim1972</span>
+                <a href="#">Đăng xuất</a>
+            </div>
+        </div>
+    </header>
+    <div class="body-wrap">
+        <div class="create-post_body container">
+            <div class="row">
+                <div class="col-md-3 side-bar-wrap">
+                    <img th:src="@{/images/list.png}" class="list-image">
+                    <br/>
+                    <div class="side-bar">
+                        <ul class="side-bar-list">
+                            <li>
+                                <img th:src="@{/images/SideBarImages/home.png}" class="sidebar-icon">
+                                <a href="">Home</a>
+                            </li>
+
+                            <li>
+                                <img th:src="@{/images/SideBarImages/group.png}" class="sidebar-icon">
+                                <a href="">User Management</a>
+                            </li>
+
+                            <li>
+                                <img th:src="@{/images/SideBarImages/analysis.png}" class="sidebar-icon">
+                                <a href="" class="active">Post Analysis</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <form class="col-lg-9 col-md-10 creating-wrap">
+                    <div class="creating-wrap_body">
+                        <input class="creating-wrap_body-title" placeholder="Mẫu không có tiêu đề">
+                        <textarea class="creating-wrap_body-short-description" placeholder="Mô tả ngắn"></textarea>
+
+                        <!--  code for add content    -->
+                        <div class="content-part">
+<!--                            <img class="content-part_add-content" th:src="@{/images/plus.png}"></img>-->
+                            <h4>Nội dung bài viết</h4>
+                            <div class="content-part_item">
+                                <div class="content-part_item-header">
+                                    <input type="text" class="content-part_item-header_title" placeholder="Tiêu đề đoạn" />
+                                    <input type="file" class="content-part_item-header_image"/>
+                                </div>
+                                <textarea class="content-part_item-para" id ="content-part_item-para"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button class="btn-wrap">
+                        <button type="button" style="float:right" class="creating-post-btn creating-post-btn-js">Tạo bài viết</button>
+                        <button type="button" style="float:right" class="creating-post-btn creating-post-btn_add-para">Thêm đoạn</button>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <a th:href="@{/api/v1/dev_updating/admin/homepage}">move to home page</a>
+
+    <!--    script for tinymce-->
+    <script src="https://cdn.tiny.cloud/1/9v06nc4f6k6j87g1800vmbs2e3i4wc44ght6y4ce1n3l6vti/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+    <script>
+        tinymce.init({
+          selector: '#content-part_item-para',
+          plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+          tinycomments_mode: 'embedded',
+          tinycomments_author: 'Author name',
+          mergetags_list: [
+            { value: 'First.Name', title: 'First Name' },
+            { value: 'Email', title: 'Email' },
+          ],
+          ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+        });
+    </script>
+    <script th:src="@{/JS/appForPostCreating.js}"></script>
+</body>
+</html>

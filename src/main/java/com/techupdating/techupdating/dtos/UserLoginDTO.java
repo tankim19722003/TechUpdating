@@ -18,5 +18,7 @@ public class UserLoginDTO {
     @NotNull(message = "Password can not be empty")
     private String password;
 
+    private String emailCode;
+
 
 }

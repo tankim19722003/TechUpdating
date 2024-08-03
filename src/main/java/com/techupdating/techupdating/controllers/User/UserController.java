@@ -42,7 +42,7 @@ public class UserController {
             BindingResult result,
             Model model
     ) {
-
+        System.out.println("co vao day");
         if (result.hasErrors()) {
             return "login-form";
         } else {
@@ -78,7 +78,7 @@ public class UserController {
         Model model
     ) {
         if (theResult.hasErrors()) {
-            return "register-form";
+            return "/User/register-form";
         } else {
 
             // save user

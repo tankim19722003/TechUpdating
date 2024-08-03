@@ -16,7 +16,7 @@
         </div>
         <div class="login-form_wrap">
 
-            <form class="login-form" th:action="@{/api/v1/dev_updating/admin/processAdminForm}" th:object="${adminLoginDTO}" method="POST">
+            <form class="login-form"  action="#" th:action="@{/authenticateTheUser}" th:object="${adminLoginDTO}" method="POST">
                 <h3 style="text-align:center; font-size: 1.8rem; margin-bottom:20px">Login Admin</h3>
                 <div th:if="${errorMessage}" class="error-wrap_header">
                     <img th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
@@ -25,7 +25,7 @@
                             class="error"></span>
                 </div>
                 <div class="account-wrap">
-                    <input type="text" th:field="*{account}" placeholder="User Account" class="login-form_user-account-input input"/>
+                    <input type="text" name="username" placeholder="User Account" class="login-form_user-account-input input"/>
                     <!-- check account error--->
                     <div class="error-wrap">
                         <img th:if="${#fields.hasErrors('account')}" th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="password-wrap">
-                    <input type="password" th:field="*{password}" placeholder="Password" class="login-form_password-input input"/>
+                    <input type="password" name="password" placeholder="Password" class="login-form_password-input input"/>
                     <!-- check password error--->
                     <div class="error-wrap" th:if="${#fields.hasErrors('password')}">
                         <img th:src="@{/images/mark.png}"
