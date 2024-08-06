@@ -48,8 +48,8 @@
                 </div>
                 <form class="col-lg-9 col-md-10 creating-wrap">
                     <div class="creating-wrap_body">
-                        <input class="creating-wrap_body-title" placeholder="Mẫu không có tiêu đề">
-                        <textarea class="creating-wrap_body-short-description" placeholder="Mô tả ngắn"></textarea>
+                        <input class="creating-wrap_body-title" placeholder="Mẫu không có tiêu đề"  value="this is my title">
+                        <textarea class="creating-wrap_body-short-description" placeholder="Mô tả ngắn">My best short description</textarea>
 
                         <!--  code for add content    -->
                         <div class="content-part">
@@ -60,7 +60,7 @@
                                     <input type="text" class="content-part_item-header_title" placeholder="Tiêu đề đoạn" />
                                     <input type="file" class="content-part_item-header_image"/>
                                 </div>
-                                <textarea class="content-part_item-para" id ="content-part_item-para"></textarea>
+                                <textarea class="content-part_item-para" id ="content-part_item-para_0"></textarea>
                             </div>
                         </div>
 
@@ -83,7 +83,7 @@
     <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
     <script>
         tinymce.init({
-          selector: '#content-part_item-para',
+          selector: '#content-part_item-para_0',
           plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
           toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
           tinycomments_mode: 'embedded',

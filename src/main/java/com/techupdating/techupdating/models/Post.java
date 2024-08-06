@@ -1,15 +1,20 @@
 package com.techupdating.techupdating.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "post")
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Post {
 
     @Id
@@ -24,7 +29,7 @@ public class Post {
     private String shortDescription;
 
     @Column(name = "created_at")
-    private Date createAt;
+    private Date createdAt;
 
     @Column(name = "updated_at")
     private  Date updatedAt;
@@ -44,6 +49,20 @@ public class Post {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "course_id")
     private Course course;
+
+    @OneToMany(mappedBy = "post",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Part> parts;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+        updatedAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Date();
+    }
 
 
 }

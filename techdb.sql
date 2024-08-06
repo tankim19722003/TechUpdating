@@ -60,7 +60,7 @@ CREATE TABLE part (
     id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255),
     content TEXT,
-    post_id int,
+    post_id INT NOT NULL,
     CONSTRAINT fk_part_post FOREIGN KEY(post_id) REFERENCES post(id) ON DELETE CASCADE
 );
 
@@ -72,12 +72,36 @@ CREATE TABLE image (
 );
 
 
+-- remove the user foreign key in role
+ALTER TABLE role
+DROP FOREIGN KEY fk_role_user;
+
+ALTER TABLE role
+DROP COLUMN user_id;
+
+-- create table user_role
+create table user_role (
+     id INT PRIMARY KEY AUTO_INCREMENT,
+     role_id INT NOT NULL CHECK (role_id > 0),
+     CONSTRAINT fk_role_user FOREIGN KEY (role_id) REFERENCES role(id),
+     user_id INT NOT NULL check (user_id > 0),
+    CONSTRAINT fk_user_role FOREIGN KEY (user_id) REFERENCES user(id)
+);
 
 
+-- query to add new role
+INSERT INTO `techupdatingdb2`.`role` (`id`, `name`) VALUES ('1', 'user');
+INSERT INTO `techupdatingdb2`.`role` (`id`, `name`) VALUES ('2', 'admin');
 
 
+-- query to create new user
+INSERT INTO `techupdatingdb2`.`user` (`id`, `fullname`, `account`, `password`, `email`, `enabled`) VALUES ('1', 'Kim Ngọc Tân', 'tankim123', 'tankim123', 'tankim1972@gmail.com', '1');
 
+-- create role for user
+INSERT INTO `techupdatingdb2`.`user_role` (`id`, `role_id`, `user_id`) VALUES ('1', '1', '1');
 
+-- create new course
+INSERT INTO `techupdatingdb2`.`course` (`id`, `course_name`, `user_id`) VALUES ('1', 'Java Course', '1');
 
 
 

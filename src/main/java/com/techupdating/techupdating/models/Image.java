@@ -7,24 +7,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "course")
-@Builder
+@Table(name = "image")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Course {
+public class Image {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
-    @Column(name = "course_name")
-    private String courseName;
+    @Column(name = "url_image")
+    private String urlImage;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {
             CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
     })
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "part_id")
+    private Part part;
+
+
 }

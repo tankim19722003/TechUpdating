@@ -1,7 +1,7 @@
 package com.techupdating.techupdating;
 
 import com.techupdating.techupdating.Services.UserService;
-import com.techupdating.techupdating.configurations.CustomUserDetailsService;
+//import com.techupdating.techupdating.configurations.CustomUserDetailsService;
 import com.techupdating.techupdating.configurations.EmailServiceImpl;
 import com.techupdating.techupdating.dtos.AdminLoginDTO;
 import com.techupdating.techupdating.dtos.UserLoginDTO;
@@ -27,21 +27,18 @@ public class TechupdatingApplication {
 			RoleRepository roleRepository,
 			UserRepository userRepository,
 			UserService userService,
-			EmailServiceImpl emailService,
-			CustomUserDetailsService customUserDetailsService
+			EmailServiceImpl emailService
 	) {
 		return runner -> {
-			UserDetail(customUserDetailsService);
-//			sendEmail(emailService);
-//			createUser(roleRepository, userRepository);
+//			findUserById(userRepository);
 		};
 	}
 
-	private void UserDetail(CustomUserDetailsService customUserDetailsService) {
-		String account = "tuankiet123";
-		customUserDetailsService.loadUserByUsername(account);
-
-	}
+//	private void UserDetail(CustomUserDetailsService customUserDetailsService) {
+//		String account = "tuankiet123";
+//		customUserDetailsService.loadUserByUsername(account);
+//
+//	}
 
 	private void sendEmail(EmailServiceImpl emailService) {
 		String to = "tankim1972@gmail.com";
@@ -107,12 +104,14 @@ public class TechupdatingApplication {
 
 	private void findUserById(UserRepository userRepository) {
 		// id
-		int id = 1;
+		int id = 5;
 
 		System.out.println("Finding user");
 		User user = userRepository.findById(id).orElseThrow(
 				() -> new RuntimeException("User does not exist")
 		);
+
+		System.out.println(user.getRoles());
 		System.out.println(user);
 
 
