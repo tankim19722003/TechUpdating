@@ -1,6 +1,11 @@
 * {
     box-sizing:border-box;
 }
+
+.label-header {
+    font-size:1.1rem;
+    margin-right:8px;
+}
 .body-wrap {
     background-color:#F8F9FD;
     padding: 32px 0px;
@@ -13,6 +18,34 @@
     height: 500px;
     max-height: 100%;
     padding: 10px;
+}
+
+.creating-wrap_body-title-header {
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 32px;
+}
+.creating-wrap_body-category {
+    margin: 16px 0px;
+    display:flex;
+}
+
+.creating-wrap_body-category-course_select,
+.creating-wrap_body-category-language_select {
+    font-size: 1.1rem;
+    width: 200px;
+    padding: 8px;
+    border-radius: 4px;
+    border:1px solid #ccc;
+}
+
+
+.creating-wrap_body-category-course_select {
+    width:300px;
+}
+
+.creating-wrap_body-category-course {
+    margin-left: 16px;
 }
 .list-image {
     width:30px;

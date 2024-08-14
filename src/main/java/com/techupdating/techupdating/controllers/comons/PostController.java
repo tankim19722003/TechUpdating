@@ -23,6 +23,7 @@ public class PostController {
     @GetMapping("/show_post_creating")
     public String showPostCreating(
     ) {
+
         return "Admin/post-creating";
     }
 

@@ -24,6 +24,9 @@ public class PostDTO {
     @JsonProperty("course_id")
     private int courseId;
 
+    @JsonProperty("language_id")
+    private int languageId;
+
     private List<PartDTO> parts;
 
 }

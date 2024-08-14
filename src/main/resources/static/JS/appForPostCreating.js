@@ -2,13 +2,73 @@
 let $ = document.querySelector.bind(document);
 let $$ = document.querySelectorAll.bind(document);
 let counter = 0;
-//  <div class="content-part_item">
-//    <div class="content-part_item-header">
-//        <input type="text" class="content-part_item-header_title" placeholder="Tiêu đề đoạn">
-//        <input type="file" class="content-part_item-header_image">
-//    </div>
-//    <textarea class="content-part_item-para"></textarea>
-//   </div>
+
+window.onload = () => {
+
+    showLanguageOption();
+
+}
+
+async function showLanguageOption() {
+
+   let api = "/api/v1/dev_updating/admin/language/get_all_languages";
+    try {
+       let languagesObj = await fetch(api);
+
+        let languages = await languagesObj.json();
+
+        let selectLanguageWrap = $(".creating-wrap_body-category-language_select");
+
+        for (let language of languages) {
+            let option = document.createElement("option");
+            option.value = language.id;
+            option.text = language.name;
+            selectLanguageWrap.appendChild(option);
+
+            // set event for option
+            option.onclick = () => {
+                console.log("Hello");
+            }
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+
+// set event for display course
+let selectLanguageWrap = $(".creating-wrap_body-category-language_select");
+
+selectLanguageWrap.onchange = () => {
+    let languageId = selectLanguageWrap.options[selectLanguageWrap.selectedIndex].value;
+
+    console.log(languageId);
+    // call api to display
+    let courses = findCoursesByLanguageId(languageId);
+}
+
+async function findCoursesByLanguageId(languageId) {
+
+    let url = "/api/v1/dev_updating/admin/course/" + languageId;
+
+    let coursesObject = await fetch(url);
+    let courses = await coursesObject.json();
+
+    // append option to course select tag
+    let courseSelectWrap = $(".creating-wrap_body-category-course_select");
+
+   courseSelectWrap.innerHTML = "";
+    for (let course of courses) {
+        let option = document.createElement("option");
+        option.value = course.id;
+        option.text = course.course_name;
+
+        // append course option to select
+        courseSelectWrap.appendChild(option);
+    }
+}
+
+
 
 let btnAddPara = $(".creating-post-btn_add-para");
 
@@ -58,52 +118,47 @@ btnAddPara.onclick = () => {
         });
 }
 
-// creating post
-let btnCreatingPost = $(".creating-post-btn-js");
-
-btnCreatingPost.onclick = () => {
-//    let image = $(".content-part_item-header_image");
-//
-//    let file =image.files[0];
-//    console.log(file);
-
-        let postTitle = $(".creating-wrap_body-title").value;
-        let shortDescription = $(".creating-wrap_body-short-description").value;
-
-        let paraTitle = $(".content-part_item-header_title").value;
-        let content = tinymce.get("content-part_item-para").getContent();
-
-        console.log(postTitle);
-        console.log(shortDescription);
-        console.log(paraTitle);
-        console.log(content);
-
-}
-
 // function to submit post content to server
 const createBtn = $(".creating-post-btn-js");
 
 
 createBtn.onclick = () => {
         let post = {};
-//    let contents = [
-//    ];
-//    for (let i = 0; i <= counter; i++) {
-//        let selector = "content-part_item-para_" + i;
-//        console.log(selector);
-//        let contentItem = tinymce.get(selector).getContent();
-//        contents.push(contentItem);
-//    }
-//
-//    console.log(contents);
 
     // get title value
     let titleValue = $(".creating-wrap_body-title").value;
+
+    // check is title empty
+    if (titleValue == "") {
+        alert("Vui lòng nhập tiêu đề bài viết!");
+        return;
+    }
     post.title = titleValue;
 
     // get short description
     let shortDescriptionValue = $(".creating-wrap_body-short-description").value;
     post.short_description = shortDescriptionValue;
+
+    // get language
+    let selectLanguageWrap = $(".creating-wrap_body-category-language_select");
+    let languageId = selectLanguageWrap.options[selectLanguageWrap.selectedIndex];
+    // check empty language Id
+    if (languageId == null) {
+        alert("Vui lòng chọn ngôn ngữ");
+        return;
+    }
+    post.languageId = languageId.value;
+
+
+    // get course
+    let selectCourseWrap = $(".creating-wrap_body-category-course_select")
+    let courseId = selectCourseWrap.options[selectCourseWrap.selectedIndex];
+    if (courseId == null) {
+        alert("Vui lòng chọn khóa học");
+        return;
+    }
+
+    post.courseId = courseId.value
 
     // get part
     let contentItems = $$(".content-part_item");
@@ -118,7 +173,7 @@ createBtn.onclick = () => {
         index++;
     }
 
-    createPost(post);
+//    createPost(post);
 
     console.log(post);
 
@@ -160,8 +215,11 @@ async function createPost(post) {
     // append user
     formData.append("userId", 1);
 
+    // append language id
+    formData.append("languageId", post.languageId);
+
     // append course id
-    formData.append("courseId", 1);
+    formData.append("courseId", post.courseId);
 
     parts.forEach( (partItem, index) => {
 

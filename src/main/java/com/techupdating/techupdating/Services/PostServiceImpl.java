@@ -4,6 +4,7 @@ import com.techupdating.techupdating.dtos.PartDTO;
 import com.techupdating.techupdating.dtos.PostDTO;
 import com.techupdating.techupdating.models.*;
 import com.techupdating.techupdating.repositories.*;
+import com.techupdating.techupdating.responses.CourseResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,7 @@ public class PostServiceImpl implements PostService{
     private final PartRepository partRepository;
     private final PostRepository postRepository;
     private final ImageRepository imageRepository;
+    private final LanguageRepository languageRepository;
 
     @Override
     @Transactional
@@ -51,6 +53,7 @@ public class PostServiceImpl implements PostService{
                 () ->  new RuntimeException("Post does not found")
         );
     }
+
 
     @Transactional
     private void savingPart(Post post, PostDTO postDTO) throws IOException {
@@ -129,6 +132,14 @@ public class PostServiceImpl implements PostService{
         post.setUser(user);
 
         return post;
+
+    }
+
+
+
+    @Override
+    public List<Language> findAllLanguage() {
+        return languageRepository.findAll();
 
     }
 

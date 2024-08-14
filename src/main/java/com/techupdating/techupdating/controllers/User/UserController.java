@@ -14,7 +14,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("api/v1/dev_updating")
+@RequestMapping("${api.prefix}")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -93,5 +93,15 @@ public class UserController {
             // redirect to login page
             return "/User/Register-successfully";
         }
+    }
+
+    @GetMapping("/show_home_page")
+    public String showHomePage(
+            Model model
+    ) {
+        // ADD USER TO MODEL
+
+        // redirect to home page
+        return "/User/home-page";
     }
 }

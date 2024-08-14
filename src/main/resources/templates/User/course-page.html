@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/common-css.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/styleForCourse.css}">
+    <title>Khóa học</title>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <img th:src="@{/images/logo.png}" class="header-left_logo">
+            <a href="#" class="header-left_link">Trang chủ</a>
+            <a th:href="@{/api/v1/dev_updating/course/show_course/1}" class="header-left_link">Khóa học</a>
+            <a href="#" class="header-left_link">Liên hệ</a>
+        </div>
+
+        <div class="header-right">
+            <div class="header-right-notify">
+                <div class="header-right-notify_img"></div>
+            </div>
+
+            <div class="header-right-auth">
+
+                <!-- does not login               -->
+                <a href="login-form.html" class="header-right-auth_login">Login</a>
+
+                <!-- Login   -->
+
+                <!--                <div class="header-right-auth-user">-->
+                <!--                    <img th:src="@{/images/user.png}" class="header-right-auth-user_image"/>-->
+                <!--                    <div class="header-right-auth-user_wrap">-->
+                <!--                        <span class="header-right-auth-user_account">tankim1972</span>-->
+                <!--                        <img th:src="@{/images/down.png}" class="header-right-auth-user_down"/>-->
+                <!--                    </div>-->
+                <!--                    &lt;!&ndash; login controller          &ndash;&gt;-->
+                <!--                </div>-->
+            </div>
+        </div>
+    </header>
+    <nav>
+        <div class="nav">
+            <ul class="nav-course">
+
+<!--               <li class="nav-course_item">Java</li>-->
+<!--                <li class="nav-course_item">PHP</li>-->
+<!--                <li class="nav-course_item">Javascript</li>-->
+<!--                <li class="nav-course_item">.Net</li>-->
+<!--                <li class="nav-course_item">ReactJS</li>-->
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="body">
+        <div class="course">
+<!--            <div href="login-form.html" class="course-item">-->
+<!--               <div class="course-item_body">-->
+<!--                   <img th:src="@{/images/frontend/bootstrap.jpeg}" class="course-item_image">-->
+<!--                   <h4 class="course-item_title">Java core</h4>-->
+<!--                   <p class="course-item_short_description">Khóa học cung cấp kiến thức cơ bản về lập trình java </p>-->
+<!--                   <div class="course-item-footer">-->
+<!--                       <div class="course-item-footer-user">-->
+<!--                           <img th:src="@{/images/user.png}" class="course-item-footer-user_image">-->
+<!--                           <span class="course-item-footer-user_quantity">20500</span>-->
+<!--                       </div>-->
+
+<!--                       <p class="course-item-footer_price">Free</p>-->
+<!--                   </div>-->
+<!--                   <div class="course-register-wrap">-->
+<!--                       <a href="#" class="course-register-wrap_btn">Đăng kí</a>-->
+<!--                   </div>-->
+<!--               </div>-->
+<!--            </div>-->
+        </div>
+
+        <div class="pagination">
+            <ul class="pagination-list">
+                <li style="font-family: monospace;font-size: 1.1rem;font-weight: 400; cursor:pointer">Previous</li>
+                <li class="pagination-list_item">1</li>
+                <li class="pagination-list_item">2</li>
+                <li class="pagination-list_item">3</li>
+                <li style="font-family: monospace;font-size: 1.1rem;font-weight: 400;cursor:pointer">Next</li>
+
+            </ul>
+        </div>
+    </div>
+    <script th:src="@{/Js/appforCourse.js}"></script>
+</body>
+</html>

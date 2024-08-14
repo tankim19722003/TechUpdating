@@ -1,5 +1,6 @@
 package com.techupdating.techupdating.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,6 +40,7 @@ public class User{
     @OneToMany(mappedBy = "user", cascade = {
             CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
     })
+    @JsonManagedReference
     private List<Course> courses;
 
 

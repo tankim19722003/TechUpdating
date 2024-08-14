@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/CSS/styleForHomePage.css}">
+    <title>Trang chủ</title>
+</head>
+<body>
+
+    <style>
+        .body-introduce {
+            background-image: url("/images/BackgroundIntroduce.jpg");
+            background-repeat: no-repeat, repeat;
+            background-position: center;
+            background-size: cover;
+            object-fit: contain;
+        }
+    </style>
+    <header>
+        <div class="header-left">
+            <img th:src="@{/images/logo.png}" class="header-left_logo">
+            <a href="#" class="header-left_link">Trang chủ</a>
+            <a th:href="@{/api/v1/dev_updating/course/show_course/1}" class="header-left_link">Khóa học</a>
+            <a href="#" class="header-left_link">Liên hệ</a>
+        </div>
+
+        <div class="header-right">
+            <div class="header-right-notify">
+                <div class="header-right-notify_img"></div>
+            </div>
+
+            <div class="header-right-auth">
+
+                <!-- does not login               -->
+                <a href="login-form.html" class="header-right-auth_login">Login</a>
+
+                <!-- Login   -->
+
+<!--                <div class="header-right-auth-user">-->
+<!--                    <img th:src="@{/images/user.png}" class="header-right-auth-user_image"/>-->
+<!--                    <div class="header-right-auth-user_wrap">-->
+<!--                        <span class="header-right-auth-user_account">tankim1972</span>-->
+<!--                        <img th:src="@{/images/down.png}" class="header-right-auth-user_down"/>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; login controller          &ndash;&gt;-->
+<!--                </div>-->
+            </div>
+        </div>
+    </header>
+
+    <div class="body">
+        <section class="body-introduce">
+            <div class="body-introduce-wrap">
+                <span class="body-introduce_web-name">Dev Java</span>
+                <span class="body-introduce_slogan">Đơn giản, vận dụng, dễ hiểu</span>
+                <div class="body-introduce-search">
+                    <input type="text" class="body-introduce-search_input" placeholder="Tìm kiếm">
+                    <div class="body-introduce-search_btn-wrap">
+                        <img th:src="@{/images/search.png}" class="body-introduce-search_btn"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="body-section">
+            <h1 class="body-section_header">Backend</h1>
+            <span class="body-section_slogan">Cẩn thẩn là điều mà một backend nên có</span>
+          <div class="body-section-course body-section-course-backend">
+
+          </div>
+        </section>
+
+        <section class="body-section">
+            <h1 class="body-section_header">Frontend</h1>
+            <span class="body-section_slogan">Tỉ mỉ làm nền một trang web hoàn hảo</span>
+            <div class="body-section-course body-section-course-frontend">
+
+            </div>
+        </section>
+
+        <footer>
+            @ 2024 copyright by: <span style="font-weight:bold">Dev Java</span>
+        </footer>
+    </div>
+
+    <script>
+
+        window.onload = async() => {
+            <!--  display backend language          -->
+            let backendId = 2;
+            let apiBackend = "http://localhost:8080/api/v1/dev_updating/category/" + backendId;
+            let categoryBackend = await getCategory(apiBackend);
+            let backendNode = document.querySelector(".body-section-course-backend");
+            displayLanguage(categoryBackend, backendNode);
+
+            <!--  display frontend language          -->
+            let frontendId = 1;
+            let apiFrontEnd = "http://localhost:8080/api/v1/dev_updating/category/" + frontendId;
+
+            let categoryFrontend = await getCategory(apiFrontEnd);
+            let frontEndNode = document.querySelector(".body-section-course-frontend");
+            displayLanguage(categoryFrontend, frontEndNode);
+
+        }
+
+        async function getCategory(api) {
+
+            let categoryObj = await fetch(api);
+
+            return await categoryObj.json();
+        }
+
+        function displayLanguage(category, node) {
+            let languages = category.languages;
+
+            if (languages.length == 0) {
+                node.innerHTML = "<p style ='color: #767575;'>Không có khóa học</p>";
+                return;
+            }
+
+            let folder = (category.name.toLowerCase() === "backend")? "backend" : "frontend";
+
+            for (let language of languages) {
+                let courseDiv = document.createElement("div");
+                courseDiv.classList.add("body-section-course-item");
+
+                let image = document.createElement("img");
+                image.src = "/images/" + folder + "/"+ language.image_name;
+                image.classList.add("body-section-course-item_image");
+                courseDiv.appendChild(image);
+
+                 let btnWrap = document.createElement("div");
+                btnWrap.classList.add("body-section-course-item_btn-wrap");
+
+                let api = "/api/v1/dev_updating/";
+                let a = document.createElement("a");
+                a.href = api;
+                a.classList.add("body-section-course-item_btn");
+                a.textContent = "Vào học ngay";
+
+                btnWrap.appendChild(a);
+                courseDiv.appendChild(btnWrap);
+
+                node.appendChild(courseDiv);
+            }
+
+        }
+
+    </script>
+</body>
+</html>

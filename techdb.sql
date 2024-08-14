@@ -1,3 +1,4 @@
+DROP DATABASE techupdatingdb2;
 create database techupdatingdb2;
 USE techupdatingdb2;
 
@@ -25,12 +26,35 @@ CREATE TABLE role (
     CONSTRAINT fk_role_user FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
+-- table category
+create table category(
+	id INT PRIMARY KEY auto_increment,
+    name varchar(255) not null
+);
+
+-- create table language
+create table language(
+     id INT PRIMARY KEY AUTO_INCREMENT,
+     name VARCHAR(255) NOT NULL,
+     category_id int not null,
+     FOREIGN KEY(category_id) references category(id)  ON DELETE CASCADE
+);
+alter table language add  column img_name varchar(255);
+
 CREATE TABLE course (
     id INT PRIMARY KEY AUTO_INCREMENT,
     course_name VARCHAR(255) NOT NULL,
     user_id int,
-    CONSTRAINT fk_course_user FOREIGN KEY (user_id) references user(id)
+    CONSTRAINT fk_course_user FOREIGN KEY (user_id) references user(id),
+    language_id INT NOT NULL,
+    CONSTRAINT fk_course_language FOREIGN KEY(language_id) REFERENCES language(id) ON DELETE CASCADE
 );
+
+alter table course add column price int check(price >= 0);
+alter table course add column quantity_of_user int check(quantity_of_user >= 0);
+alter table course add column short_description text;
+alter table course add column created_at date;
+alter table course add column updated_at date;
 
 CREATE TABLE post (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -89,6 +113,7 @@ create table user_role (
 );
 
 
+
 -- query to add new role
 INSERT INTO `techupdatingdb2`.`role` (`id`, `name`) VALUES ('1', 'user');
 INSERT INTO `techupdatingdb2`.`role` (`id`, `name`) VALUES ('2', 'admin');
@@ -100,8 +125,26 @@ INSERT INTO `techupdatingdb2`.`user` (`id`, `fullname`, `account`, `password`, `
 -- create role for user
 INSERT INTO `techupdatingdb2`.`user_role` (`id`, `role_id`, `user_id`) VALUES ('1', '1', '1');
 
--- create new course
-INSERT INTO `techupdatingdb2`.`course` (`id`, `course_name`, `user_id`) VALUES ('1', 'Java Course', '1');
+-- create category
+INSERT INTO `techupdatingdb2`.`category` (`id`, `name`) VALUES ('1', 'frontend');
+INSERT INTO `techupdatingdb2`.`category` (`id`, `name`) VALUES ('2', 'backend');
 
 
+-- Create language
+INSERT INTO `techupdatingdb2`.`language` (`id`, `name`, `img_name`,`category_id`) VALUES ('1', 'Java', 'java.png',2);
+INSERT INTO `techupdatingdb2`.`language` (`id`, `name`, `img_name`,`category_id`) VALUES ('2', 'Ruby', 'ruby.jpg',2);
+INSERT INTO `techupdatingdb2`.`language` (`id`, `name`, `img_name`,`category_id`) VALUES ('3', 'Spring boot', 'springboot.webp',2);
+INSERT INTO `techupdatingdb2`.`language` (`id`, `name`, `img_name`,`category_id`) VALUES ('4', 'C#', 'cshape.webp',2);
+INSERT INTO `techupdatingdb2`.`language` (`id`, `name`, `img_name`,`category_id`) VALUES ('5', '.Net', 'dotnet.png',2);
+INSERT INTO `techupdatingdb2`.`language` (`id`, `name`, `img_name`,`category_id`) VALUES ('6', 'Ruby', 'ruby.jpg',2);
+
+INSERT INTO `techupdatingdb2`.`language` (`id`, `name`, `category_id`, `img_name`) VALUES ('7', 'HTML', '1', 'html.jpg');
+INSERT INTO `techupdatingdb2`.`language` (`id`, `name`, `category_id`, `img_name`) VALUES ('8', 'CSS', '1', 'css.png');
+INSERT INTO `techupdatingdb2`.`language` (`id`, `name`, `category_id`, `img_name`) VALUES ('9', 'Bootstrap', '1', 'bootstrap.jpeg');
+INSERT INTO `techupdatingdb2`.`language` (`id`, `name`, `category_id`, `img_name`) VALUES ('10', 'Javascript', '1', 'javascript.png');
+INSERT INTO `techupdatingdb2`.`language` (`id`, `name`, `category_id`, `img_name`) VALUES ('11', 'ReactJS', '1', 'reactjs.png');
+
+-- create course
+INSERT INTO `techupdatingdb2`.`course` (`id`, `course_name`, `user_id`, `language_id`) VALUES ('1', 'Lập trình java core', '1', '1');
+INSERT INTO `techupdatingdb2`.`course` (`id`, `course_name`, `user_id`, `language_id`) VALUES ('2', 'Lập trình java nâng cao', '1', '1');
 

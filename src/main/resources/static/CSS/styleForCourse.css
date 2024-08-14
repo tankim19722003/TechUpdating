@@ -1,0 +1,147 @@
+* {
+    box-sizing:border-box;
+}
+.nav {
+    background-image: linear-gradient(to right, #14B78A, #85E7CC);
+}
+
+.nav-course {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 16px;
+}
+
+.nav-course_item {
+    margin: 0 8px;
+    font-size: 1.2rem;
+    color: white;
+    font-family: monospace;
+    cursor:pointer;
+    padding: 2px 10px;
+}
+
+
+.nav-course_item:hover {
+    background-color: white;
+    border-radius: 12px;
+    color: black;
+}
+
+.body {
+    max-width: 1200px;
+    margin: 32px auto;
+}
+
+.course {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.course-item {
+    width: calc(100% / 4);
+    padding: 0px 16px;
+    margin: 16px 0px;
+}
+
+.course-item_body {
+    cursor:pointer;
+    display: flex;
+    flex-direction: column;
+    border:1px solid #ccc;
+    padding: 20px 16px;
+    border-radius:8px;
+}
+.course-item_border {
+
+}
+.course-item_image {
+}
+
+.course-item_title {
+    text-align: center;
+    font-size: 1.3rem;
+    line-height: 2;
+
+}
+
+.course-item_short_description {
+    font-size: 1rem;
+    font-family: system-ui;
+}
+
+.course-item-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+.course-item-footer-user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.course-item-footer-user_image {
+    width: 15px;
+}
+
+.course-item-footer-user_quantity {
+    margin-left: 6px;
+    color: #808080;
+}
+
+.course-item-footer_price {
+    font-family: sans-serif;
+    color: #24dd24;
+}
+
+.course-register-wrap {
+    text-align: right;
+    margin-top: 32px;
+}
+
+.course-register-wrap_btn {
+    background-color: #F8981D;
+    text-decoration: none;
+    color: black;
+    padding: 8px 16px;
+    border-radius: 16px;
+}
+
+/* style for pagination*/
+.pagination {
+    text-align:center;
+}
+
+.pagination-list {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: center;
+    margin-top: 16px;
+    align-items: center;
+}
+
+.pagination-list_item {
+      margin: 0px 8px;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      border-radius: 30px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+}
+
+.pagination-list_item:hover {
+    background-color: #5ccbdc;
+    border:none;
+}
