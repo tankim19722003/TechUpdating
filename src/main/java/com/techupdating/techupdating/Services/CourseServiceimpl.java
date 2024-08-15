@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.awt.print.Pageable;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +36,23 @@ public class CourseServiceimpl implements CourseService{
         return courseResponses;
     }
 
+    @Override
+    public CourseResponse findCourseById(int courseId) {
 
+        Course course = courseRepository.findById(courseId).orElseThrow(
+                () -> new RuntimeException("Course does not found")
+        );
+
+        return CourseResponse.builder()
+                .courseId(course.getId())
+                .courseName(course.getCourseName())
+                .quantityOfUser(course.getQuantityOfUser())
+                .shortDescription(course.getShortDescription())
+                .createdAt(course.getCreatedAt())
+                .updatedAt(course.getUpdatedAt())
+                .price(course.getPrice())
+                .build();
+    }
 
 
 }

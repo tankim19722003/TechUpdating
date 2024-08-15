@@ -3,17 +3,13 @@ package com.techupdating.techupdating.controllers.comons;
 import com.techupdating.techupdating.Services.CourseService;
 import com.techupdating.techupdating.responses.CourseResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 @Controller
@@ -44,5 +40,21 @@ public class CourseController {
         model.addAttribute("courses", courses);
 
         return "/User/course-page";
+    }
+
+    @GetMapping("/process_show_lesson/{id}")
+    public String processShowLesson(
+            @PathVariable("id") int id,
+            Model model
+    ) {
+
+        CourseResponse courseResponse = courseService.findCourseById(id);
+        model.addAttribute("courseResponse", courseResponse);
+        //         if already register
+        return "/User/registercourse.html";
+
+
+        //    if does not register
+//        return "/User/registerCourse"
     }
 }

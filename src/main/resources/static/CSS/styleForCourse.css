@@ -53,6 +53,10 @@
     padding: 20px 16px;
     border-radius:8px;
 }
+
+.course-item_body: hover {
+    border:1px solid blue;
+}
 .course-item_border {
 
 }

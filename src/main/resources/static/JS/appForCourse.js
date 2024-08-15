@@ -50,7 +50,7 @@ async function displayCourses(id) {
     let html = "";
 
     for (let courseItem of courses) {
-        html += `<div class="course-item">
+        html += `<div class="course-item" onclick="showCourse(${courseItem.id})">
                     <div class="course-item_body">
                         <img src="/images/frontend/bootstrap.jpeg" class="course-item_image">
                         <h4 class="course-item_title">${courseItem.course_name}</h4>
@@ -96,4 +96,13 @@ function displayLanguages(languages) {
         liElement.textContent = language.name;
         languagueContainter.appendChild(liElement);
     }
+}
+
+function showCourse(id) {
+
+    // api
+    let api = "http://localhost:8080/api/v1/dev_updating/course/process_show_lesson/" + id;
+    window.location.href = api;
+
+
 }
