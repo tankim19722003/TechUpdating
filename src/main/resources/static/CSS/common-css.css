@@ -54,12 +54,12 @@
  }
 
  .header-left_link {
-     margin: 0 16px;
-     text-decoration: none;
-     color: black;
-     font-weight: bold;
-     font-size:1.2rem;
-     font-family: sans-serif;
+    margin: 0 8px;
+   text-decoration: none;
+   color: black;
+   font-weight: bold;
+   font-size: 1.2rem;
+   font-family: math;
  }
 
 

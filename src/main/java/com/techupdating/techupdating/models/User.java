@@ -37,10 +37,20 @@ public class User{
     @Column(name="enabled")
     private boolean enabled;
 
-    @OneToMany(mappedBy = "user", cascade = {
-            CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
-    })
-    @JsonManagedReference
+//    @OneToMany(mappedBy = "user", cascade = {
+//            CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
+//    })
+//    @JsonManagedReference
+
+    @ManyToMany( fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
+            })
+    @JoinTable(
+            name = "user_course",
+            joinColumns = @JoinColumn(name= "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
     private List<Course> courses;
 
 

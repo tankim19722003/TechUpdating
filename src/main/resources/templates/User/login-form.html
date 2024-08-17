@@ -3,13 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/CSS/login-form-style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/common-css.css}">
     <title>Login</title>
 </head>
 <body>
-    <a  href="#" class="header">
-        <span style="font-size:30px; font-weight:bold">D</span>
-        <span>Java</span>
-    </a>
+    <header>
+    <div class="header-left">
+        <img th:src="@{/images/logo.png}" class="header-left_logo">
+        <a href="#" class="header-left_link">Trang chủ</a>
+        <a th:href="@{/api/v1/dev_updating/course/show_course/1}" class="header-left_link">Khóa học</a>
+        <a href="#" class="header-left_link">Liên hệ</a>
+    </div>
+
+    <div class="header-right">
+        <div class="header-right-notify">
+            <div class="header-right-notify_img"></div>
+        </div>
+    </div>
+</header>
 
     <div class="form-wrap">
         <form class="login-form" th:action="@{/api/v1/dev_updating/processLoginForm}" th:object="${userLoginDTO}" method="POST">
@@ -32,6 +43,7 @@
 
             <div class="password-wrap">
                 <input type="password" name="password" th:field="*{password}" placeholder="Password" class="login-form_password-input input"/>
+                <img th:src="@{/images/view.png}" id="show-password">
                 <!-- check password error--->
                 <div class="error-wrap" th:if="${#fields.hasErrors('password')}">
                     <img th:src="@{/images/mark.png}"
@@ -42,18 +54,33 @@
                 </div>
             </div>
 
-            <div class="password-wrap">
-                <input type="text" name="emailCode" th:field="*{emailCode}" placeholder="Email code" class="login-form_password-input input"/>
-            </div>
+<!--            <div class="password-wrap">-->
+<!--                <input type="text" name="emailCode" th:field="*{emailCode}" placeholder="Email code" class="login-form_password-input input"/>-->
+<!--            </div>-->
 
 
-            <a href="#" style="text-align: right;text-decoration:none">Quên mật khẩu?</a>
+            <a href="#" style="text-align: right;text-decoration:none;font-family: math;">Quên mật khẩu?</a>
 
             <button type="submit" class="login-form_btn">Đăng nhập</button>
-            <span style="margin-top: 32px;text-align: center;">
+            <span style="margin-top: 32px;text-align: center;font-family: math;">
                 Bạn đã có tài khoản chưa? <a th:href="@{/api/v1/dev_updating/register}">Đăng kí</a>
             </span>
         </form>
     </div>
+
+    <script>
+
+        document.getElementById("show-password").onclick = () => {
+
+            let input = document.querySelector("#password");
+
+            let type = input.type;
+
+            console.log(type);
+           if (type === "password") input.type ="text";
+           else input.type = "password";
+        }
+
+    </script>
 </body>
 </html>

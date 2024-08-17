@@ -10,7 +10,7 @@
     <header>
         <div class="header-left">
             <img th:src="@{/images/logo.png}" class="header-left_logo">
-            <a href="#" class="header-left_link">Trang chủ</a>
+            <a th:href="@{/api/v1/dev_updating/show_home_page}" class="header-left_link">Trang chủ</a>
             <a th:href="@{/api/v1/dev_updating/course/show_course/1}" class="header-left_link">Khóa học</a>
             <a href="#" class="header-left_link">Liên hệ</a>
         </div>
@@ -54,24 +54,7 @@
 
     <div class="body">
         <div class="course">
-            <ga href="login-form.html" class="course-item">
-               <div class="course-item_body">
-                   <img th:src="@{/images/frontend/bootstrap.jpeg}" class="course-item_image">
-                   <h4 class="course-item_title">Java core</h4>
-                   <p class="course-item_short_description">Khóa học cung cấp kiến thức cơ bản về lập trình java </p>
-                   <div class="course-item-footer">
-                       <div class="course-item-footer-user">
-                           <img th:src="@{/images/user.png}" class="course-item-footer-user_image">
-                           <span class="course-item-footer-user_quantity">20500</span>
-                       </div>
 
-                       <p class="course-item-footer_price">Free</p>
-                   </div>
-                   <div class="course-register-wrap">
-                       <a href="#" class="course-register-wrap_btn">Đăng kí</a>
-                   </div>
-               </div>
-            </ga>
         </div>
 
 <!--        <div class="pagination">-->

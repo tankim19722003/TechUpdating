@@ -46,12 +46,7 @@
     display:flex;
     justify-content: center;
     align-items:center;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    z-index:1;
+    height: calc(100vh - 55px);
 }
 
 .logo-wrap {
@@ -88,14 +83,24 @@
     margin:4px 0px;
     position:relative;
 }
+
+#show-password {
+    height: 15px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-7.5px);
+    right: 8px;
+    cursor: pointer;
+}
 .input {
     height: 30px;
     border: 1px solid #ccc;
     padding: 8px 14px;
     border-radius: 4px;
     margin: 10px 0px;
-    font-size:0.8rem;
+    font-size:0.9rem;
     width:100%;
+    font-family: system-ui;
 }
 
 

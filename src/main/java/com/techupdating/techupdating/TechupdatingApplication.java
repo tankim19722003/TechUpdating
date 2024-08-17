@@ -6,16 +6,17 @@ import com.techupdating.techupdating.dtos.AdminLoginDTO;
 import com.techupdating.techupdating.dtos.UserLoginDTO;
 import com.techupdating.techupdating.dtos.UserRegisterDTO;
 import com.techupdating.techupdating.models.*;
-import com.techupdating.techupdating.repositories.LanguageRepository;
-import com.techupdating.techupdating.repositories.RoleRepository;
-import com.techupdating.techupdating.repositories.UserRepository;
+import com.techupdating.techupdating.repositories.*;
 import com.techupdating.techupdating.responses.CategoryResponse;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Locale;
 
 @SpringBootApplication
 public class TechupdatingApplication {
@@ -26,11 +27,71 @@ public class TechupdatingApplication {
 
 	@Bean
 	public CommandLineRunner commandLineRunner(
-		CourseService courseService
+		CourseRepository courseRepository,
+		CourseRegistrationRepository registerCourseRepository
 	) {
 		return runner -> {
-
+//			checkExistingUserInCourse(registerCourseRepository);
+//			findRegistrationByUserIdAndCourseId(registerCourseRepository);
+			calculateDays();
 		};
+	}
+
+	private void calculateDays() {
+
+		LocalDate localDate = LocalDate.of(2024, 8, 17);
+		LocalDate localDate2 = LocalDate.of(2024, 8, 20);
+		long daysBetween = ChronoUnit.DAYS.between(localDate, localDate2);
+		System.out.println(daysBetween);
+	}
+
+
+	private void findRegistrationByUserIdAndCourseId(CourseRegistrationRepository courseRegistrationRepository){
+
+		int userId = 1;
+		int courseId = 2;
+
+		// find usser
+		System.out.println("Finding user: ");
+		CourseRegistration courseRegistration = courseRegistrationRepository
+				.findRegistrationByUserIdAndCourseId(userId, courseId);
+
+		System.out.println(courseRegistration);
+
+	}
+	private void checkExistingUserInCourse(CourseRegistrationRepository registerCourseRepository) {
+
+		int userId = 1;
+		int courseId = 2;
+
+		boolean isExistingUserInCourse = registerCourseRepository.existsByUserIdAndCourseId(userId, courseId);
+
+		System.out.println("User is existing: " + isExistingUserInCourse);
+
+	}
+
+	private void findCourseById(CourseRegistrationRepository courseRegistrationRepository) {
+
+		int id = 1;
+
+		CourseRegistration courseRegistration = courseRegistrationRepository.findById(id).orElseThrow(
+				() ->  new RuntimeException("Course does not found")
+		);
+
+		System.out.println(courseRegistration);
+
+	}
+
+	private void findCourseById(CourseRepository courseRepository) {
+
+		// course id
+		int courseId = 1;
+
+		Course course = courseRepository.findById(courseId).orElseThrow(
+				() ->  new RuntimeException("Data not found exception")
+		);
+
+		System.out.println(course);
 	}
 
 

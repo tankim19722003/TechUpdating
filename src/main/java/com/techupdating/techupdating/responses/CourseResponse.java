@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -29,9 +30,12 @@ public class CourseResponse {
     private int quantityOfUser;
 
     @JsonProperty("created_at")
-    private Date createdAt;
+    private LocalDate createdAt;
 
     @JsonProperty("updated_at")
-    private Date updatedAt;
+    private LocalDate updatedAt;
+
+    @JsonProperty("image_name")
+    private String imageName;
 
 }

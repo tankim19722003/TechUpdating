@@ -9,8 +9,8 @@ window.onload = async() => {
     displayLanguages(languages);
 
 //    display course relate to language
-//    let languageId = 1;
-//    displayCourses(languageId);
+    let languageId = 1;
+    displayCourses(languageId);
 
 }
 
@@ -63,9 +63,6 @@ async function displayCourses(id) {
 
                             <p class="course-item-footer_price">${courseItem.price}</p>
                         </div>
-                        <div class="course-register-wrap">
-                            <a href="#" class="course-register-wrap_btn">Đăng kí</a>
-                        </div>
                     </div>
                  </div>`;
     }
@@ -101,7 +98,7 @@ function displayLanguages(languages) {
 function showCourse(id) {
 
     // api
-    let api = "http://localhost:8080/api/v1/dev_updating/course/process_show_lesson/" + id;
+    let api = "http://localhost:8080/api/v1/dev_updating/course/process_show_lesson?"+"course_id="+id+"&"+"user_id=1";
     window.location.href = api;
 
 

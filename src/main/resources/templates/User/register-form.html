@@ -4,16 +4,27 @@
     <meta charset="UTF-8">
     <title>Register</title>
     <link rel="stylesheet" type="text/css" th:href="@{/CSS/register.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/common-css.css}">
 </head>
 <body>
-    <a  th:href="@{/api/v1/dev_updating/login}" class="header">
-        <span style="font-size:30px; font-weight:bold">D</span>
-        <span>Java</span>
-    </a>
+    <header>
+    <div class="header-left">
+        <img th:src="@{/images/logo.png}" class="header-left_logo">
+        <a href="#" class="header-left_link">Trang chủ</a>
+        <a th:href="@{/api/v1/dev_updating/course/show_course/1}" class="header-left_link">Khóa học</a>
+        <a href="#" class="header-left_link">Liên hệ</a>
+    </div>
+
+    <div class="header-right">
+        <div class="header-right-notify">
+            <div class="header-right-notify_img"></div>
+        </div>
+    </div>
+</header>
 
     <div class="form-wrap">
         <form class="form-register" th:action="@{/api/v1/dev_updating/processRegisterForm}" method="post" th:object="${userRegisterDTO}">
-            <h1 style="text-align:center; font-size:1.4rem;margin-bottom: 10px;">Register</h1>
+            <h1 style="text-align:center; font-size:1.4rem;margin-bottom: 10px;font-family: system-ui;">Register</h1>
            <div th:if="${errorMessage}" class="error-wrap">
                <img th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
                 <span

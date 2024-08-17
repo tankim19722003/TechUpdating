@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <title>Đăng kí khóa học</title>
     <link rel="stylesheet" type="text/css" th:href="@{/CSS/common-css.css}">
+    <link rel="stylesheet" th:href="@{/CSS/styleForRegistrationCourse.css}">
 </head>
 <body>
 
 <header>
     <div class="header-left">
         <img th:src="@{/images/logo.png}" class="header-left_logo">
-        <a href="#" class="header-left_link">Trang chủ</a>
+        <a th:href="@{/api/v1/dev_updating/show_home_page}" class="header-left_link">Trang chủ</a>
         <a th:href="@{/api/v1/dev_updating/course/show_course/1}" class="header-left_link">Khóa học</a>
         <a href="#" class="header-left_link">Liên hệ</a>
     </div>
@@ -55,7 +56,38 @@
 </nav>
 
 <body>
-        <span th:text="${courseResponse}"></span>
+        <div class="body">
+
+            <div class="body-left">
+                <img th:src="@{/images/CourseImages/{imageName}(imageName=${courseResponse.imageName})}" class="body-left_img">
+            </div>
+
+            <div class="body-right">
+                <h3 class="body-right_title" th:text="${courseResponse.courseName}"></h3>
+                <p class="body-right_short_description" th:text="${courseResponse.shortDescription}"></p>
+
+                <div class="body-right-bottom">
+                    <div class="body-right-bottom-left">
+                        <p class="body-right-bottom_date" th:text="'Ngày Tạo: ' + ${courseResponse.createdAt}"></p>
+                        <div class="body-right-bottom-right-user">
+                            <img th:src="@{/images/user.png}" class="body-right-bottom-right-user_img">
+                            <span class="body-right-bottom-right-user_quantity" th:text="${courseResponse.quantityOfUser}"></span>
+                        </div>
+                    </div>
+                    <div class="body-right-bottom-right">
+                        <p class="body-right-bottom-right_pice" th:text="'Giá: ' + ${courseResponse.price} + ' VND'"></p>
+                    </div>
+                </div>
+
+                <div class="body-right-btn">
+                    <a th:href="@{/api/v1/dev_updating/course/process_register_course(user_id=${userId}, course_id=${courseId})}" class="body-right-btn_register">
+                        Đăng kí
+                    </a>
+                </div>
+            </div>
+        </div>
+
+<span th:text="${courseId}"></span>
 </body>
 <script th:src = "@{/JS/common.js}"></script>
 </body>

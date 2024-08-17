@@ -7,7 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "course")
@@ -35,17 +37,32 @@ public class Course {
     private int quantityOfUser;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    private LocalDate createdAt;
 
     @Column(name = "updated_at")
-    private Date updatedAt;
+    private LocalDate updatedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {
-            CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
-    })
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
-    private User user;
+    @Column(name = "image_name")
+    private String imageName;
+
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {
+//            CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
+//    })
+//    @JoinColumn(name = "user_id")
+//    @JsonBackReference
+//    private User user;
+
+
+    @ManyToMany( fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
+            })
+    @JoinTable(
+            name = "user_course",
+            joinColumns = @JoinColumn(name= "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> users;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {
             CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
@@ -59,6 +76,12 @@ public class Course {
         return "Course{" +
                 "id=" + id +
                 ", courseName='" + courseName + '\'' +
+                ", shortDescription='" + shortDescription + '\'' +
+                ", price=" + price +
+                ", quantityOfUser=" + quantityOfUser +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", imageName='" + imageName + '\'' +
                 '}';
     }
 }
