@@ -1,6 +1,7 @@
 package com.techupdating.techupdating.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,9 +34,6 @@ public class Course {
     @Column(name = "price")
     private int price;
 
-    @Column(name = "quantity_of_user")
-    private int quantityOfUser;
-
     @Column(name = "created_at")
     private LocalDate createdAt;
 
@@ -64,12 +62,17 @@ public class Course {
     )
     private List<User> users;
 
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = {
             CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
     })
     @JoinColumn(name = "language_id")
     @JsonBackReference
     private Language language;
+
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<PostTopic> postTopics;
 
     @Override
     public String toString() {
@@ -78,7 +81,6 @@ public class Course {
                 ", courseName='" + courseName + '\'' +
                 ", shortDescription='" + shortDescription + '\'' +
                 ", price=" + price +
-                ", quantityOfUser=" + quantityOfUser +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", imageName='" + imageName + '\'' +

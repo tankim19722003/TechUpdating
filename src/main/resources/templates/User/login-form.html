@@ -4,53 +4,28 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/CSS/login-form-style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/CSS/common-css.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/StyleForHeader.css}">
     <title>Login</title>
 </head>
 <body>
-    <header>
-    <div class="header-left">
-        <img th:src="@{/images/logo.png}" class="header-left_logo">
-        <a href="#" class="header-left_link">Trang chủ</a>
-        <a th:href="@{/api/v1/dev_updating/course/show_course/1}" class="header-left_link">Khóa học</a>
-        <a href="#" class="header-left_link">Liên hệ</a>
-    </div>
-
-    <div class="header-right">
-        <div class="header-right-notify">
-            <div class="header-right-notify_img"></div>
-        </div>
-    </div>
-</header>
+    <div th:replace="/Fragments/header :: header"></div>
 
     <div class="form-wrap">
         <form class="login-form" th:action="@{/api/v1/dev_updating/processLoginForm}" th:object="${userLoginDTO}" method="POST">
             <h3 style="text-align:center; font-size: 1.8rem; margin-bottom:20px">Login</h3>
-            <div th:if="${errorMessage}" class="error-wrap_header">
-                <img th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
-                <span
-                        th:text="${errorMessage}"
-                        class="error"></span>
-            </div>
             <div class="account-wrap">
-                <input type="text" name="account" th:field="*{account}" placeholder="User Account" class="login-form_user-account-input input"/>
+                <input type="text" name="account" id="account" placeholder="User Account" class="login-form_user-account-input input"/>
                 <!-- check account error--->
-                <div class="error-wrap">
-                    <img th:if="${#fields.hasErrors('account')}" th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
-                    <span th:errors="*{account}"
-                          class="error"></span>
+                <div class="error-wrap" id="error-account">
                 </div>
             </div>
 
             <div class="password-wrap">
-                <input type="password" name="password" th:field="*{password}" placeholder="Password" class="login-form_password-input input"/>
-                <img th:src="@{/images/view.png}" id="show-password">
+                <input type="password" id ="password" name="password" placeholder="Password" class="login-form_password-input input"/>
+                <img th:src="@{/images/view.png}" id="show-password"/>
+                <img th:src="@{/images/hide.png}" id="hide-password"/>
                 <!-- check password error--->
-                <div class="error-wrap" th:if="${#fields.hasErrors('password')}">
-                    <img th:src="@{/images/mark.png}"
-                         class="error-icon">
-                    <span
-                            th:errors="*{password}"
-                            class="error"></span>
+                <div class="error-wrap" id ="error-password">
                 </div>
             </div>
 
@@ -61,7 +36,7 @@
 
             <a href="#" style="text-align: right;text-decoration:none;font-family: math;">Quên mật khẩu?</a>
 
-            <button type="submit" class="login-form_btn">Đăng nhập</button>
+            <button type="button" class="login-form_btn" onclick="login()">Đăng nhập</button>
             <span style="margin-top: 32px;text-align: center;font-family: math;">
                 Bạn đã có tài khoản chưa? <a th:href="@{/api/v1/dev_updating/register}">Đăng kí</a>
             </span>
@@ -82,5 +57,7 @@
         }
 
     </script>
+
+    <script th:src="@{/JS/appForUser.js}"></script>
 </body>
 </html>

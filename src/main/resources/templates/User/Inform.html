@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/common-css.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/StyleForHeader.css}">
+    <title>Inform</title>
+</head>
+<body>
+<!-- Header  -->
+<div th:replace="/Fragments/header :: header"></div>
+
+<div style="height: calc(100vh - 55px - 60px);
+            display: flex;
+            height: calc(100vh - 55px - 60px);
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;">
+    <h1 th:text="${message}" style="font-size:26px"></h1>
+</div>
+
+<!--  footer  -->
+<div th:replace="/Fragments/footer :: footer"></div>
+
+</body>
+</html>

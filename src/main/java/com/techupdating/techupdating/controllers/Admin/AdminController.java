@@ -1,58 +1,68 @@
 package com.techupdating.techupdating.controllers.Admin;
 
-import com.techupdating.techupdating.Services.UserService;
+import com.techupdating.techupdating.Services.UserServiceImpl;
 import com.techupdating.techupdating.dtos.AdminLoginDTO;
 import com.techupdating.techupdating.models.User;
-import jakarta.servlet.http.HttpSession;
+import com.techupdating.techupdating.responses.ErrorResponse;
+import com.techupdating.techupdating.responses.UserInfoResponse;
+import com.techupdating.techupdating.responses.UserResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/api/v1/dev_updating/admin")
 @RequiredArgsConstructor
 public class AdminController {
     private final Logger logger = Logger.getLogger(this.getClass().getName());
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
-    @GetMapping("/login")
+    @GetMapping("/show_login_form")
     public String showLoginForm(Model model) {
         AdminLoginDTO adminLoginDTO = new AdminLoginDTO();
         model.addAttribute("adminLoginDTO", adminLoginDTO);
 
-
-
         return "/Admin/login-form";
     }
 
-    @PostMapping("/processAdminLoginForm")
-    public String processAdminForm(
-            @Valid @ModelAttribute("adminLoginDTO") AdminLoginDTO adminLoginDTO,
-            BindingResult bindingResult,
-            Model model
+    @PostMapping("/login")
+    public ResponseEntity<?> login(
+            @Valid @RequestBody AdminLoginDTO adminLoginDTO,
+            BindingResult result
     ) {
-        logger.info("This data passing " + adminLoginDTO);
-        System.out.println("Có gọi vào đây");
         // check valid input
-        if (bindingResult.hasErrors()) return "/Admin/login-form";
+        if (result.hasErrors()) {
+            List<ErrorResponse> errorMessages = result.getFieldErrors()
+                    .stream()
+                    .map(fieldError -> ErrorResponse.builder()
+                            .name(fieldError.getField())  // Set the field name
+                            .error(fieldError.getDefaultMessage())  // Set the error message if needed
+                            .build())
+                    .collect(Collectors.toList());
+
+            System.out.println(errorMessages);
+            return ResponseEntity.badRequest().body(errorMessages);
+        }
 
         // check account with db
         try {
-            User user = userService.loginAdmin(adminLoginDTO);
-            model.addAttribute("admin", user);
-            return "/User/login-successfully";
+            UserInfoResponse admin = User.toUserInfoResponse(userService.loginAdmin(adminLoginDTO));
+            return ResponseEntity.ok().body(admin);
         } catch(Exception e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "/Admin/login-form";
+            return ResponseEntity.badRequest().body(
+                    ErrorResponse.builder()
+                            .name(ErrorResponse.ERROR)
+                            .error(e.getMessage())
+                            .build()
+            );
         }
 
     }

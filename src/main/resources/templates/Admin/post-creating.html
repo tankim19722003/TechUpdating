@@ -2,117 +2,116 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/bootstrap.min.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/CSS/common-css.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/CSS/style-for-post.css}">
-    <title>Đăng bài viết</title>
+    <title>Post creating</title>
+    <link rel="stylesheet" th:href="@{/CSS/style-for-post-creating.css}">
 </head>
 <body>
-    <header class="header">
-        <div class="logo-wrap">
-            <img th:src="@{/images/logo.png}" class="logo_image">
-        </div>
-        <div class="user-wrap">
-            <img th:src="@{/images/user.png}" class="avatar">
-            <div class="user-info-wrap">
-                <span>tankim1972</span>
-                <a href="#">Đăng xuất</a>
+   <!--Header!-->
+   <div th:replace="/Fragments/AdminHeader :: admin-header"></div>
+
+    <div id="body">
+        <!-- nav  -->
+        <div th:replace="/Fragments/AdminNav :: admin-nav"></div>
+
+
+        <div id="content">
+            <div id="content-header">
+                <img th:src="@{/images/add-post.png}" id="content-header_image">
+                <h1 id="content-header_title"> Tạo Bài viết </h1>
             </div>
-        </div>
-    </header>
-    <div class="body-wrap">
-        <div class="create-post_body container">
-            <div class="row">
-                <div class="col-md-3 side-bar-wrap">
-                    <img th:src="@{/images/list.png}" class="list-image">
-                    <br/>
-                    <div class="side-bar">
-                        <ul class="side-bar-list">
-                            <li>
-                                <img th:src="@{/images/SideBarImages/home.png}" class="sidebar-icon">
-                                <a href="">Home</a>
-                            </li>
 
-                            <li>
-                                <img th:src="@{/images/SideBarImages/group.png}" class="sidebar-icon">
-                                <a href="">User Management</a>
-                            </li>
+            <div id="content-category">
+                <div id="content-category-header">
+                    <img th:src="@{/images/category.png}" id="content-category-header_img">
+                    <span id="content-category-header_label">Danh mục bài viết</span>
+                </div>
 
-                            <li>
-                                <img th:src="@{/images/SideBarImages/analysis.png}" class="sidebar-icon">
-                                <a href="" class="active">Post Analysis</a>
-                            </li>
+                <div id="content-category-list">
+                    <div class="content-category-item">
+                        <label class="content-category-item_label">
+                            Ngôn ngữ
+                        </label>
+                        <select class="content-category-item-select" id="language-select" onchange="addCourseToSelect()">
+                            <option class="content-category-item-option"   selected disabled value="">Ngôn ngữ</option>
+                        </select>
+                    </div>
 
-                        </ul>
+                    <div class="content-category-item">
+                        <label class="content-category-item_label">
+                            Khóa học
+                        </label>
+                        <select class="content-category-item-select" id="course-select">
+                            <option class="content-category-item-option" selected disabled value="">Khóa học</option>
+                        </select>
+                    </div>
+
+                    <div class="content-category-item">
+                        <label class="content-category-item_label">
+                            Nhóm kiến thức
+                        </label>
+                        <select class="content-category-item-select" id="post-group-select">
+                            <option class="content-category-item-option" selected disabled value="">Nhóm kiến thức</option>
+                        </select>
                     </div>
                 </div>
-                <form class="col-lg-9 col-md-10 creating-wrap">
-                    <div class="creating-wrap_body">
-                        <h2 class="creating-wrap_body-title-header">Đăng bài mới</h2>
-                            <h4>Mô tả khóa học</h4>
-                            <div class="creating-wrap_body-category">
-                                <div class="creating-wrap_body-category-language">
-                                    <label for="" class="label-header"> Ngôn ngữ lập trình </label>
-                                    <select class="creating-wrap_body-category-language_select">
-                                        <option value="" disabled selected>Ngôn ngữ</option>
-                                    </select>
-                                </div>
+            </div>
 
-                                <div class="creating-wrap_body-category-course">
-                                    <label class="label-header"> Khóa học </label>
-                                    <select class="creating-wrap_body-category-course_select">
-                                        <option value="" disabled selected>Khóa học</option>
-                                    </select>
-                                </div>
+            <div id="post">
+                <div id="post-title">
+                    <img th:src="@{/images/post.png}" id="post-title_img"/>
+                    <span id="post-title_span">Mô tả bài viết</span>
+                </div>
 
-                            </div>
-                        <input class="creating-wrap_body-title" placeholder="Mẫu không có tiêu đề">
-                        <textarea class="creating-wrap_body-short-description" placeholder="Mô tả ngắn"></textarea>
-
-                        <!--  code for add content    -->
-                        <div class="content-part">
-<!--                            <img class="content-part_add-content" th:src="@{/images/plus.png}"></img>-->
-                            <h4>Nội dung bài viết</h4>
-                            <div class="content-part_item">
-                                <div class="content-part_item-header">
-                                    <input type="text" class="content-part_item-header_title" placeholder="Tiêu đề đoạn" />
-                                    <input type="file" class="content-part_item-header_image"/>
-                                </div>
-                                <textarea class="content-part_item-para" id ="content-part_item-para_0"></textarea>
-                            </div>
-                        </div>
-
+                <div id="post-header">
+                    <div id="post-header-title">
+                        <label id="post-header_label">Tiêu đề bài viết</label>
+                        <input id="post-header_input" placeholder="Tiêu đề bài viết"/>
                     </div>
 
-                    <button class="btn-wrap">
-                        <button type="button" style="float:right" class="creating-post-btn creating-post-btn-js">Tạo bài viết</button>
-                        <button type="button" style="float:right" class="creating-post-btn creating-post-btn_add-para">Thêm đoạn</button>
-                    </button>
-                </form>
+                    <div id="post-short-description">
+                        <label id="post-short-description_label">Mô tả ngắn</label>
+                        <textarea id="post-short-description_area"></textarea>
+                    </div>
+                </div>
+
+                <div id="post-content">
+                    <img id="post-content-new-para" th:src="@{/images/blue-plus.png}" onclick="addNewPara()"/>
+                    <div id="post-content-header">
+                        <img id="post-content-header_img" th:src="@{/images/post.png}"/>
+                        <h4 id="post-content-header_title">Nội dung bài viết</h4>
+                    </div>
+
+                    <div class="post-content-item">
+
+                        <div class="post-content-item-header">
+                            <h3 class="post-content-item-header_title">Tiêu đề đoạn</h3>
+                            <input class="post-content-item-header_input" placeholder="Tên tiêu đề"/>
+                        </div>
+
+                        <textarea id="para-content-1" placeholder="Tên tiêu đề" class="para-content"></textarea>
+                    </div>
+                </div>
+
+                <div id="content-saving">
+                    <button id="save-post-btn" onclick="createPost()">Tạo bài viết</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <a th:href="@{/api/v1/dev_updating/admin/homepage}">move to home page</a>
-
-    <!--    script for tinymce-->
     <script src="https://cdn.tiny.cloud/1/9v06nc4f6k6j87g1800vmbs2e3i4wc44ght6y4ce1n3l6vti/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-
-    <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
     <script>
         tinymce.init({
-          selector: '#content-part_item-para_0',
-          plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
-          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-          tinycomments_mode: 'embedded',
-          tinycomments_author: 'Author name',
-          mergetags_list: [
-            { value: 'First.Name', title: 'First Name' },
-            { value: 'Email', title: 'Email' },
-          ],
-          ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
-        });
+           selector: '#para-content-1',
+           plugins: 'media',
+           toolbar: "undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | outdent indent"
+         });
+
+          tinymce.init({
+           selector: '#post-short-description_area'
+         });
+
     </script>
-    <script th:src="@{/JS/appForPostCreating.js}"></script>
+    <script th:src="@{/JS/app-for-post-creating.js}"></script>
 </body>
 </html>

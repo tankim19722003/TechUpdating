@@ -1,10 +1,15 @@
 package com.techupdating.techupdating.Services;
 
+import com.techupdating.techupdating.dtos.ParaPostDTO;
 import com.techupdating.techupdating.dtos.PartDTO;
+import com.techupdating.techupdating.dtos.PostCreatingDTO;
 import com.techupdating.techupdating.dtos.PostDTO;
 import com.techupdating.techupdating.models.*;
 import com.techupdating.techupdating.repositories.*;
-import com.techupdating.techupdating.responses.CourseResponse;
+import com.techupdating.techupdating.responses.CommentResponse;
+import com.techupdating.techupdating.responses.PostResponse;
+import com.techupdating.techupdating.responses.PostSelectResponse;
+import com.techupdating.techupdating.responses.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +21,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -32,26 +40,84 @@ public class PostServiceImpl implements PostService{
     private final PostRepository postRepository;
     private final ImageRepository imageRepository;
     private final LanguageRepository languageRepository;
+    private final CommentRepository commentRepository;
+    private final ImageService imageService;
+    private final PostTopicRepository postTopicRepository;
+
+//    @Override
+//    @Transactional
+//    public Post createPost (
+//            PostDTO postDTO
+//    ) throws IOException {
+//
+//        // saving post
+//        Post post = ConvertPostSaving(postDTO);
+//        post = postRepository.save(post);
+//
+//        logger.info("Post Saving: " + post);
+//
+////        // saving part
+//        savingPart(post, postDTO);
+//
+//
+//        return postRepository.findById(post.getId()).orElseThrow(
+//                () ->  new RuntimeException("Post does not found")
+//        );
+//    }
 
     @Override
     @Transactional
-    public Post createPost (
-            PostDTO postDTO
-    ) throws IOException {
+    public PostResponse createPost(int userId, PostCreatingDTO postCreatingDTO) throws IOException {
 
-        // saving post
-        Post post = ConvertPostSaving(postDTO);
-        post = postRepository.save(post);
-
-        logger.info("Post Saving: " + post);
-
-//        // saving part
-        savingPart(post, postDTO);
-
-
-        return postRepository.findById(post.getId()).orElseThrow(
-                () ->  new RuntimeException("Post does not found")
+        // check valid language, course, title id
+        User user = userRepository.findById(userId).orElseThrow(
+                () ->  new RuntimeException("Invalid user!!")
         );
+
+
+        Course course = courseRepository.findById(postCreatingDTO.getCourseId()).orElseThrow(
+                () ->  new RuntimeException("Course does not exist!!")
+        );
+
+        PostTopic postTopic = postTopicRepository.findById(postCreatingDTO.getTopicId()).orElseThrow(
+                () -> new RuntimeException("Topic does not exist!!")
+        );
+
+
+        // save post
+        Post post = Post.builder()
+                .title(postCreatingDTO.getContentPostCreatingDTO().getTitle())
+                .shortDescription(postCreatingDTO.getContentPostCreatingDTO().getShortDescription())
+                .createdAt(new Date(System.currentTimeMillis()))
+                .updatedAt(new Date(System.currentTimeMillis()))
+                .quantityOfLike(0)
+                .postView(0)
+                .user(user)
+                .course(course)
+                .postTopic(postTopic)
+                .build();
+
+        Post newPostSaving = postRepository.save(post);
+
+        // save part
+        List <Part> parts = new ArrayList<>();
+        for (ParaPostDTO paraPostDTO : postCreatingDTO.getContentPostCreatingDTO().getParaPostDTOList()) {
+            Part part = Part.builder()
+                    .title(paraPostDTO.getTitle())
+                    .content(paraPostDTO.getContent())
+                    .post(newPostSaving)
+                    .build();
+
+            Part partSaving =  partRepository.save(part);
+            parts.add(partSaving);
+        }
+
+        // add parts to post
+        post.setParts(parts);
+
+        return post.toPostResponse();
+
+
     }
 
 
@@ -64,7 +130,7 @@ public class PostServiceImpl implements PostService{
 
             // create part
             Part part = Part.builder()
-                    .title(post.getTitle())
+                    .title(partItem.getTitlePart())
                     .content(partItem.getContent())
                     .post(post)
                     .build();
@@ -73,7 +139,7 @@ public class PostServiceImpl implements PostService{
             logger.info("Part: " + part);
             // create image
             // saving image to folder
-            String filename = storeFile(partItem.getImage());
+            String filename = imageService.storeImage(partItem.getImage(), ImageFolder.uploads.toString());
 
 
             // saving image to db
@@ -141,6 +207,70 @@ public class PostServiceImpl implements PostService{
     public List<Language> findAllLanguage() {
         return languageRepository.findAll();
 
+    }
+
+    @Override
+    public CourseRegistration findAllPosts(int userId, int courseId) {
+
+        // check user existing
+        User user = userRepository.findById(userId).orElseThrow(
+                () -> new RuntimeException("User does not found")
+        );
+
+        // check course existing
+        boolean isExistingCourse = courseRepository.existsById(courseId);
+        if (!isExistingCourse) {
+            throw new RuntimeException("Course does not exist");
+        }
+
+        // finding
+        return null;
+    }
+
+    @Override
+    public PostResponse findPostById(int postId) {
+
+        Post post = postRepository.findById(postId).orElseThrow(
+                () -> new RuntimeException("Post does not found")
+        );
+
+        // convert post to post response
+        PostResponse postResponse = post.toPostResponse();
+
+        return postResponse;
+    }
+
+
+    public List<CommentResponse> findAllCommentsByPostId(int postId) {
+
+        List<Comment> comments = commentRepository.findAllCommentsByPostId(postId);
+
+        if (comments != null) {
+            List <CommentResponse> commentResponses = comments.stream().map(comment -> {
+               return Comment.toCommentResponse(comment);
+            }).toList();
+            return commentResponses;
+        }
+        return null;
+    }
+
+    @Override
+    public List<PostSelectResponse> getIdAndTitlePostByCourseId(int courseId) {
+
+        List<Post> posts = postRepository.findAllByCourseId(courseId);
+
+        if (posts != null) {
+            List<PostSelectResponse> postSelectResponses = posts.stream().map(post -> {
+                return PostSelectResponse.builder()
+                        .id(post.getId())
+                        .title(post.getTitle())
+                        .build();
+            }).toList();
+
+            return postSelectResponses;
+        }
+
+        return null;
     }
 
 

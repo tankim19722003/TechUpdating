@@ -1,0 +1,24 @@
+    <header th:fragment="header">
+        <link rel="stylesheet" th:href="@{/CSS/styleForHeader.css}" />
+        <div class="header-left">
+            <img th:src="@{/images/logo.png}" class="header-left_logo">
+            <a th:href="@{/api/v1/dev_updating/show_home_page}" class="header-left_link">Trang chủ</a>
+            <a th:href="@{/api/v1/dev_updating/course/show_course/1}" class="header-left_link">Khóa học</a>
+            <a href="#" class="header-left_link">Liên hệ</a>
+        </div>
+
+        <div class="header-right">
+            <div class="header-right-notify">
+                <div class="header-right-notify_img"></div>
+            </div>
+
+            <div class="header-right-auth">
+
+                <!-- does not login               -->
+                <a th:href="@{/api/v1/dev_updating/login}" class="header-right-auth_login">Login</a>
+
+            </div>
+        </div>
+        <script th:src="@{/JS/ScriptForHeader.js}"></script>
+    </header>
+

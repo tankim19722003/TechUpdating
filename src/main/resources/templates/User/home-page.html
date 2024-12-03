@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/CSS/styleForHomePage.css}">
+    <link rel="stylesheet" th:href="@{/CSS/StyleForHeader.css}">
     <title>Trang chủ</title>
 </head>
 <body>
@@ -16,37 +17,8 @@
             object-fit: contain;
         }
     </style>
-    <header>
-        <div class="header-left">
-            <img th:src="@{/images/logo.png}" class="header-left_logo">
-            <a href="#" class="header-left_link">Trang chủ</a>
-            <a th:href="@{/api/v1/dev_updating/course/show_course/1}" class="header-left_link">Khóa học</a>
-            <a href="#" class="header-left_link">Liên hệ</a>
-        </div>
 
-        <div class="header-right">
-            <div class="header-right-notify">
-                <div class="header-right-notify_img"></div>
-            </div>
-
-            <div class="header-right-auth">
-
-                <!-- does not login               -->
-                <a href="login-form.html" class="header-right-auth_login">Login</a>
-
-                <!-- Login   -->
-
-<!--                <div class="header-right-auth-user">-->
-<!--                    <img th:src="@{/images/user.png}" class="header-right-auth-user_image"/>-->
-<!--                    <div class="header-right-auth-user_wrap">-->
-<!--                        <span class="header-right-auth-user_account">tankim1972</span>-->
-<!--                        <img th:src="@{/images/down.png}" class="header-right-auth-user_down"/>-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash; login controller          &ndash;&gt;-->
-<!--                </div>-->
-            </div>
-        </div>
-    </header>
+    <div th:replace="/Fragments/header :: header"></div>
 
     <div class="body">
         <section class="body-introduce">
@@ -78,9 +50,7 @@
             </div>
         </section>
 
-        <footer>
-            @ 2024 copyright by: <span style="font-weight:bold">Dev Java</span>
-        </footer>
+      <div th:replace="/Fragments/footer :: footer"></div>
     </div>
 
     <script>

@@ -30,9 +30,9 @@
 .input{
     padding: 8px;
     border: 1px solid #ccc;
-    width: 300px;
+    width: 350px;
     border-radius: 4px;
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin:8px 0px;
     font-family: system-ui;
 }
@@ -74,6 +74,8 @@
     color: red;
     font-size: 0.9rem;
     padding: 0px 8px;
+    font-family: system-ui;
+    width: 350px;
 }
 
 .error-wrap {
@@ -86,4 +88,36 @@
     width:15px;
 }
 
+
+/* handle for password and retype password input */
+.input-wrap_password{
+
+}
+
+.input-wrap_password-div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.hide-show-password {
+    cursor:pointer;
+}
+.show-password {
+    height: 15px;
+}
+
+#hide-password, #hide-retype-password {
+    display:none;
+}
+
+#password, #retype-password {
+    flex: 1;
+    height: 100%;
+    border: transparent;
+    outline: none;
+    font-family: system-ui;
+}
+
+/*end handle for password and retype password input */
 

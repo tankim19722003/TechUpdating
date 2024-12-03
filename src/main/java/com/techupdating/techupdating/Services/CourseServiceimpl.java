@@ -1,24 +1,18 @@
 package com.techupdating.techupdating.Services;
 
-import com.techupdating.techupdating.models.Course;
-import com.techupdating.techupdating.models.CourseRegistration;
-import com.techupdating.techupdating.models.User;
-import com.techupdating.techupdating.repositories.CourseRegistrationRepository;
-import com.techupdating.techupdating.repositories.CourseRepository;
-import com.techupdating.techupdating.repositories.UserRepository;
-import com.techupdating.techupdating.responses.CoursePageResponse;
+import com.techupdating.techupdating.daos.PostTopicDAO;
+import com.techupdating.techupdating.models.*;
+import com.techupdating.techupdating.repositories.*;
 import com.techupdating.techupdating.responses.CourseResponse;
+import com.techupdating.techupdating.responses.PostResponse;
+import com.techupdating.techupdating.responses.PostResponseInTopic;
+import com.techupdating.techupdating.responses.TopicResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.print.Pageable;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,16 +20,22 @@ public class CourseServiceimpl implements CourseService{
     private final CourseRepository courseRepository;
     private final CourseRegistrationRepository courseRegistrationRepository;
     private final UserRepository userRepository;
+    private final PostTopicRepository postTopicRepository;
+    private final PostTopicDAO postTopicDAO;
+    private final PostRepository postRepository;
+
     @Override
     public List<CourseResponse> findCoursesByLanguageId(int languageId) {
         List<CourseResponse>  courseResponses =  courseRepository.findCourseByLanguageId(languageId).stream().map(
                 course -> {
+                    // query to get quantity of user from user and course
+                    int quantityUserEnrolled = courseRegistrationRepository.getQuantityUserRegistered(course.getId());
                     return CourseResponse.builder()
                             .courseName(course.getCourseName())
                             .courseId(course.getId())
                             .shortDescription(course.getShortDescription())
                             .price(course.getPrice())
-                            .quantityOfUser(course.getQuantityOfUser())
+                            .quantityOfUser(quantityUserEnrolled)
                             .createdAt(course.getCreatedAt())
                             .updatedAt(course.getUpdatedAt())
                             .build();
@@ -50,10 +50,13 @@ public class CourseServiceimpl implements CourseService{
                 () -> new RuntimeException("Course does not found")
         );
 
+        // get quantity of user enroll
+        int quantityOfUserEnrolled = courseRegistrationRepository.getQuantityUserRegistered(course.getId());
+
         return CourseResponse.builder()
                 .courseId(course.getId())
                 .courseName(course.getCourseName())
-                .quantityOfUser(course.getQuantityOfUser())
+                .quantityOfUser(quantityOfUserEnrolled)
                 .shortDescription(course.getShortDescription())
                 .createdAt((LocalDate)course.getCreatedAt())
                 .updatedAt(course.getUpdatedAt())
@@ -96,9 +99,6 @@ public class CourseServiceimpl implements CourseService{
             courseRegistration.setEnabled(true);
             result = 1;
 
-            // increase quantity of user
-            int quantityOfUser = course.getQuantityOfUser() + 1;
-            course.setQuantityOfUser(quantityOfUser);
         }
 
         // set course to register course
@@ -115,4 +115,60 @@ public class CourseServiceimpl implements CourseService{
         return courseRegistrationRepository
                 .findRegistrationByUserIdAndCourseId(userId, courseId);
     }
+
+    @Override
+    public List<TopicResponse> findAllTopicsResponse(int courseId, int userId) {
+
+        // check user register course
+        boolean isUserRegisterCourse = courseRegistrationRepository.existsByUserIdAndCourseId(userId, courseId);
+        if (!isUserRegisterCourse) {
+            return null;
+        }
+
+        // get topic
+        List<PostTopic> postTopics = postTopicRepository.findAllPostByCourseId(courseId).orElseThrow(
+                () ->  new RuntimeException("Topic does not found")
+        );
+
+        // convert list topic to list topic response
+        List<TopicResponse> topicResponses = postTopics.stream().map(postTopic -> {
+
+            TopicResponse topicResponse = new TopicResponse();
+
+            topicResponse.setTitleName(postTopic.getTopicName());
+
+            // convert post to post response
+            topicResponse.setPostResponses(
+                    postTopic.getPosts().stream().map(post -> {
+                        return PostResponseInTopic.builder()
+                                .id(post.getId())
+                                .title(post.getTitle())
+                                .build();
+                    }).toList()
+            );
+
+            return topicResponse;
+        }).toList();
+
+        return topicResponses;
+    }
+
+    @Override
+    public List<TopicResponse> findAllTopicsResponseWithJoinFetch(int courseId, int userId) {
+        return postTopicDAO.findAllTopicWithJoinFetch(userId, courseId);
+    }
+
+    @Override
+    public PostResponse findPostById(int postId) {
+
+        Post post = postRepository.findById(postId).orElseThrow(
+                () -> new RuntimeException("Post does not found")
+        );
+
+        // convert post to post response
+        PostResponse postResponse = post.toPostResponse();
+
+        return postResponse;
+    }
+
 }

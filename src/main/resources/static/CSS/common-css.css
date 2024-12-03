@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Ysabeau:ital,wght@0,1..1000;1,1..1000&display=swap');
  /* common style */
  * {
      padding:0;
@@ -7,6 +7,17 @@
      font-size:16px;
  }
 
+.d-flex {
+    display: flex!important;
+}
+
+.d-block {
+    display: block!important;
+}
+
+.d-none {
+    display:none!important;
+}
 .nav {
     background-image: linear-gradient(to right, #14B78A, #85E7CC);
 }
@@ -81,7 +92,7 @@
  }
  .header-right-auth_login {
      text-decoration: none;
-     background-color: #3030fa;
+     background-color: #1E90FF;
      color: white;
      padding: 8px 40px;
      border-radius: 20px;
@@ -136,3 +147,14 @@
     color: #545AF4!important;
     font-weight:bold;
 }
+
+/* style for footer */
+footer {
+    font-size: 1.1rem;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    padding: 16px 0px;
+    font-family: cursive;
+}
+
+/*end style for foooter*/

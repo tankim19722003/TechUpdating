@@ -26,6 +26,7 @@ public class CourseResponse {
     @JsonProperty("short_description")
     private String shortDescription;
 
+    // have to count from table course and user
     @JsonProperty("quantity_of_user")
     private int quantityOfUser;
 

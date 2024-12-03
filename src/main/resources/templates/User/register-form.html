@@ -5,22 +5,11 @@
     <title>Register</title>
     <link rel="stylesheet" type="text/css" th:href="@{/CSS/register.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/CSS/common-css.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/StyleForHeader.css}">
 </head>
 <body>
-    <header>
-    <div class="header-left">
-        <img th:src="@{/images/logo.png}" class="header-left_logo">
-        <a href="#" class="header-left_link">Trang chủ</a>
-        <a th:href="@{/api/v1/dev_updating/course/show_course/1}" class="header-left_link">Khóa học</a>
-        <a href="#" class="header-left_link">Liên hệ</a>
-    </div>
-
-    <div class="header-right">
-        <div class="header-right-notify">
-            <div class="header-right-notify_img"></div>
-        </div>
-    </div>
-</header>
+    <!-- Header  -->
+    <div th:replace="/Fragments/header :: header"></div>
 
     <div class="form-wrap">
         <form class="form-register" th:action="@{/api/v1/dev_updating/processRegisterForm}" method="post" th:object="${userRegisterDTO}">
@@ -34,63 +23,43 @@
 
             <div class="input-wrap">
                 <div class="input-wrap_fullname">
-                    <input th:field="*{fullname}" class="input" type="text" placeholder="Họ và tên">
+                    <input th:field="*{fullname}" class="input" id="fullname" type="text" placeholder="Họ và tên">
 
                     <!--error hanling-->
-                    <div class="error-wrap">
-                        <img th:if="${#fields.hasErrors('fullname')}" th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
-                        <span th:if="${#fields.hasErrors('fullname')}"
-                              th:errors="*{fullname}"
-                              class="error"></span>
-                    </div>
+                    <div class="error-wrap" id="error-fullname"></div>
                 </div>
 
                 <div class="input-wrap_account">
-                    <input th:field="*{account}" class="input" type="text" placeholder="Tài khoản">
+                    <input th:field="*{account}" class="input" id="account" type="text" placeholder="Tài khoản">
 
                     <!--error hanling-->
-                    <div class="error-wrap">
-                        <img th:if="${#fields.hasErrors('account')}" th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
-                        <span th:if="${#fields.hasErrors('account')}"
-                              th:errors="*{account}"
-                              class="error"></span>
-                    </div>
+                    <div class="error-wrap" id="error-account"></div>
                 </div>
 
                 <div class="input-wrap_password">
-                    <input th:field="*{password}" class="input" type="password" placeholder="Mật khẩu">
-
-                    <!--error handling-->
-                    <div class="error-wrap">
-                        <img th:if="${#fields.hasErrors('password')}" th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
-                        <span th:if="${#fields.hasErrors('password')}"
-                              th:errors="*{password}"
-                              class="error"></span>
+                    <div class="input input-wrap_password-div">
+                        <input th:field="*{password}"  id = "password" type="password" placeholder="Mật khẩu">
+                        <img th:src="@{/images/view.png}" class="show-password hide-show-password" id="show-password">
+                        <img th:src="@{/images/hide.png}" class="show-password hide-show-password" id="hide-password">
                     </div>
+                    <!--error handling-->
+                    <div class="error-wrap" id="error-password"></div>
                 </div>
 
                 <div class="input-wrap_retype-password">
-                    <input th:field="*{retypePassword}" class="input" type="password" placeholder="Nhập lại mật khẩu">
-
-                    <!--error handling-->
-                    <div class="error-wrap">
-                        <img th:if="${#fields.hasErrors('retypePassword')}" th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
-                        <span th:if="${#fields.hasErrors('retypePassword')}"
-                              th:errors="*{retypePassword}"
-                              class="error"></span>
+                    <div class="input input-wrap_password-div">
+                        <input th:field="*{retypePassword}" class="retype-password" id ="retype-password" type="password" placeholder="Nhập lại mật khẩu">
+                        <img th:src="@{/images/view.png}" class="show-password hide-show-password" id="show-retype-password">
+                        <img th:src="@{/images/hide.png}" class="show-password hide-show-password" id="hide-retype-password">
                     </div>
+                    <!--error handling-->
+                    <div class="error-wrap" id="error-retype-password"></div>
                 </div>
 
                 <div class="input-wrap_email">
-                    <input th:field="*{email}" class="input" type="text" placeholder="Email">
-
-                    <!--error hanling-->
-                    <div class="error-wrap">
-                        <img th:if="${#fields.hasErrors('email')}" th:src="@{/images/mark.png}" alt="" sizes="" srcset="" class="error-icon">
-                        <span th:if="${#fields.hasErrors('email')}"
-                              th:errors="*{email}"
-                              class="error"></span>
-                    </div>
+                    <input th:field="*{email}" class="input" id ="email" type="text" placeholder="Email">
+                    <!--error handling-->
+                    <div class="error-wrap" id="error-email"></div>
                 </div>
 
 
@@ -98,10 +67,12 @@
 
             <div class="btn-wrap">
                 <a th:href="@{/api/v1/dev_updating/login}" class="btn" id="login-btn">Đăng nhập</a>
-                <button type="submit" class="btn" id="register-btn">Đăng kí</button>
+                <button type="button" class="btn" id="register-btn" onclick="register()">Đăng kí</button>
             </div>
         </form>
     </div>
 
+
+    <script th:src="@{/JS/appForUser.js}"></script>
 </body>
 </html>

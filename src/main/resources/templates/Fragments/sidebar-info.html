@@ -1,0 +1,20 @@
+<div id="sidebar" th:fragment="sidebar-info">
+    <h1 id="sidebar_title">Quản lí tài khoản</h1>
+    <span id="sidebar-intro">Quản lí tài khoản bao gồm xem thông tin, chỉnh sửa thông tin các nhân như tài khoản,mật khảu, avatar... </span>
+    <ul id="sidebar-control">
+        <a th:href="@{/api/v1/dev_updating/show-user-info-page/{id}(id=${userInforResponse.id})} " class="sidebar-control-item active" id="change-info">
+            <img th:src="@{/images/user.png}" class="sidebar-control-item_img">
+            <p class="sidebar-control-item_name">Thông tin cá nhân</p>
+        </a>
+
+
+        <a th:href="@{/api/v1/dev_updating/show-security-password-page/{id}(id=${userInforResponse.id})} " class="sidebar-control-item" id = "security-password">
+            <img th:src="@{/images/verified.png}" class="sidebar-control-item_img">
+            <p class="sidebar-control-item_name">Mật khẩu và bảo mật</p>
+        </a>
+    </ul>
+
+    <script type="text/javascript">
+        console.log("Hello");
+    </script>
+</div>

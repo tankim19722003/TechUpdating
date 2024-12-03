@@ -45,6 +45,10 @@
     margin: 16px 0px;
 }
 
+.course-item:hover {
+   transform: scale(1.04);
+}
+
 .course-item_body {
     cursor:pointer;
     display: flex;

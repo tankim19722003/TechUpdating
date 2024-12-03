@@ -41,6 +41,4 @@ public class EmailServiceImpl implements EmailService{
             System.out.println(ex.getMessage());
         }
     }
-
-
 }

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/common-css.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/styleForPostPage.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/StyleForHeader.css}">
+    <title>Bài Viết</title>
+</head>
+<body>
+
+    <!-- Header  -->
+    <div th:replace="/Fragments/header :: header"></div>
+
+    <!--  Courses  -->
+    <div th:replace="/Fragments/nav :: nav"></div>
+    <div class="body">
+        <input type="hidden" th:value="${postResponse.id}" id="post_id">
+        <div class="body-sidebar">
+            <div class="body-sidebar-topic-list" th:each="topicItem : ${topicResponse}">
+                <div class="body-sidebar-topic-list-item">
+                    <h3 class="body-sidebar-topic-list-item_name" th:text="${topicItem.titleName}"></h3>
+                    <ul class="body-sidebar-topic-list-item-post">
+                        <li class="body-sidebar-topic-list-item-post-list" th:each="postItem : ${topicItem.postResponses}">
+                            <img th:src="@{/images/check.png}" class="body-sidebar-topic-list-item-post-list_img">
+                            <a th:href="${api + '/' + postItem.id + '?user_id=1&course_id=1'}" class="body-sidebar-topic-list-item-post-list_item" th:text=${postItem.title} ></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="body-content-wrap">
+            <div class="body-content">
+                <h1 class="body-content_title" th:text="${postResponse.title}"></h1>
+                <div class="body-content-short-description-wrap">
+                    <div class="body-content_short_description-label">
+                        <img th:src="@{/images/notepad.png}" class="body-content_short_description-label_img">
+                        <span class="body-content_short_description-label_span">Nội dung tổng quát</span>
+                    </div>
+                    <div class="body-content_short_description" >
+                        <div th:utext="${postResponse.shortDescription}"></div>
+                    </div>
+                </div>
+
+                <div class="body-content-part-list">
+                    <div class="body-content-part-list-item" th:each="partItem : ${postResponse.parts}">
+
+                        <h4 class="body-content-part-list-item_title" th:text="${partItem.title}"></h4>
+
+                        <div class="body-content-part-list-item_image-wrap">
+                            <img class="body-content-part-list-item_image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnGWEwXpRS7z7rVaGrjIWWTdE8_TiYTGiYjA&s"></img>
+                            <img class="body-content-part-list-item_image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnGWEwXpRS7z7rVaGrjIWWTdE8_TiYTGiYjA&s"></img>
+                            <img class="body-content-part-list-item_image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnGWEwXpRS7z7rVaGrjIWWTdE8_TiYTGiYjA&s"></img>
+                            <img class="body-content-part-list-item_image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnGWEwXpRS7z7rVaGrjIWWTdE8_TiYTGiYjA&s"></img>
+
+                        </div>
+                        <p class="body-content-part-list-item_content" th:utext="${partItem.content}">
+
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="body-content-bottom">
+                    <div class="body-content-bottom-right">
+                        <div class="body-content-bottom-right-user-view">
+                            <img th:src="@{/images/view.png}" class="body-content-bottom-right-user-view_img"/>
+                            <span class="body-content-bottom-right-user-view_quantity" th:text="${postResponse.postView}"></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="body-content-bottom-right-user-like">
+                        <img th:src="@{/images/like.png}" class="body-content-bottom-right-user-like_img"/>
+                        <span class="body-content-bottom-right-user-like_quantity" th:text="${postResponse.quantityOfLike}">
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="comment">
+               <h1 class="comment-title">Bình luận</h1>
+                <div class="comment-input-wrap">
+                    <img th:src="@{/images/user.png}" class="comment_image"/>
+                    <form class="comment_title-form">
+                        <textarea class="comment_title-form_text-area"></textarea>
+                        <button type="button" class="comment_title-form_btn">Bình luận</button>
+                    </form>
+                </div>
+
+                <div class="comment-list">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  footer  -->
+    <div th:replace="/Fragments/footer :: footer"></div>
+
+    <script th:src="@{/Js/common.js}"></script>
+    <script th:src="@{/Js/appforPostPage.js}"></script>
+</body>
+</html>

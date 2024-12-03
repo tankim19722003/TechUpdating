@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Ysabeau:ital,wght@0,1..1000;1,1..1000&display=swap');
+* {
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+}
+#body {
+    width: 1200px;
+    max-width: 100%;
+    margin:0 auto;
+    display:flex;
+    flex-direction:row;
+}
+
+.title {
+    font-size:1.1rem;
+    font-family: "Noto Serif", serif;
+    margin: 12px 0px;
+    font-weight:bold;
+}
+
+.content-style {
+     font-family: "Nunito Sans", sans-serif;
+     font-weight:300;
+}
+
+#nav {
+    width:20%;
+}
+
+#content {
+    width:80%;
+    border-left: 1px solid #dddddd;
+    padding: 0 16px;
+}
+
+#message-before-show-post {
+
+}
+#post-image-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#post-image-header_img {
+    width: 30px;
+}
+
+#post-image-header_title {
+    text-transform: uppercase;
+    font-size:1.3rem;
+    margin:0px 8px;
+    font-family: "Noto Serif", serif;
+}
+
+/* style for post image catalog */
+#post-image-catalog {
+    margin-top: 32px;
+}
+
+#post-image-catalog-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#post-image-catalog-header_img {
+    height:24px;
+}
+
+#post-image-catalog-header_title {
+    margin: 0 8px;
+    font-family: "Noto Serif", serif;
+}
+
+
+#post-image-catalog-list {
+    margin-top: 16px;
+}
+
+.post-image-catalog-item {
+    margin: 16px;
+}
+
+.post-image-catalog-item-label {
+    display: inline-block;
+    width: 130px;
+    max-width: 100%;
+    font-family: "Noto Serif", serif;
+}
+
+.post-image-catalog-item-select {
+    height: 32px;
+    border: 1px solid #ccc;
+    padding: 6px 8px;
+    border-radius: 4px;
+}
+
+.post-image-catalog-item-select_option {
+
+}
+
+#post-body {
+    margin-top:32px;
+}
+
+#post-body-part {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#post-body-part-img {
+    width: 24px;
+}
+
+#post-body-part-title {
+    margin: 0px 12px;
+}
+
+#post-body-header {
+    margin: 16px 0px;
+    display:none;
+}
+
+#post-body-header_title {
+    text-align: center;
+    font-family: "Noto Serif", serif;
+}
+
+#post-body-header-short-desciption {
+
+}
+
+#post-body-header-short-desciption_title {
+
+}
+
+#post-body-header-short-description_content {
+
+}
+
+#post-body-header-image {
+    margin: 32px 0px;
+}
+
+#post-body-header-image_title {
+
+}
+
+#post-body-header-image-adding {
+    width: 70px;
+    margin: 0 auto;
+    display: block;
+    cursor:pointer;
+    padding: 16px 0px;
+    border-radius: 4px;
+}
+
+#post-body-content {
+    display:none;
+}
+.post-body-content-image-wrap {
+   margin: 32px 0px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.post-body-content-image-wrap-center {
+    position:relative
+}
+
+.post-body-content_close {
+    width: 24px;
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    cursor:pointer;
+}
+
+.post-body-content_close:hover {
+    transform: scale(1.2);
+}
+
+.post-body-content-image {
+    height: 300px;
+    max-height: 100%;
+    border-radius: 4px;
+}
+
+
+/*style for modal*/
+#modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #ccc;
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 3px;
+    width: 500px;
+    max-width: 100%;
+}
+
+#modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#modal-title {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#modal-image-upload {
+    width: 200px;
+    max-width: 100%;
+    margin:16px 0px;
+}
+
+#modal-input {
+    margin: 8px 0px;
+}
+
+#modal-controller {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center;
+    margin-top: 10px;
+}
+
+.btn {
+    width: 88px;
+    max-width: 100%;
+    padding: 6px 8px;
+    border: none;
+    margin: 0px 24px;
+    font-size: 1rem;
+    cursor:pointer;
+}
+
+#save-image {
+   background-color: black;
+    color: white;
+    border-radius: 4px;
+}
+
+#cancel {
+    background-color: transparent;
+    border: none;
+}
+
+
+/*end style for modal*/
+

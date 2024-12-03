@@ -9,4 +9,6 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 
     List<Course> findCourseByLanguageId(int id);
 
+    boolean existsById(int courseId);
+
 }

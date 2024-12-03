@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Security and Password</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/StyleForHeader.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/common-css.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/StyleForUserInfoPage.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/style-for-security-page.css}">
+</head>
+<body>
+    <div id="wrap">
+        <div th:replace="/Fragments/sidebar-info :: sidebar-info"></div>
+        <div id="body">
+
+            <div id="security-header">
+                <h3 id="security-header_header">
+                    Mật khẩu và bảo mật
+                </h3>
+                <p id="security-header_intro">
+                    Thay đổi mật và bảo mật 2 chiều...
+                </p>
+            </div>
+
+            <div id="security-body">
+
+                <div id="two-way-security">
+                    <div id="two-way-security-header">
+                        <img th:src="@{/images/verified.png}" id="two-way-security-header_img"/>
+                        <h4 id="two-way-security-header_title">Bảo mật 2 chiều</h4>
+                    </div>
+                    <p id="two-way-security_description">
+                        Khi bạn đăng nhập một mã đăng nhập sẽ được gửi vào mail của bạn , dùng mã code nhập vào để vào trang cá nhân của bạn. Bạn vui lòng <strong> nhập mật khẩu để Bật hoặc Tắt </strong> tính năng này
+                    </p>
+
+                    <div id="two-way-security-control" onclick="showTwoWaysConfirmationForm()">
+
+                        <div id="two-way-security-control-info">
+                            <h5 id="two-way-security-control-info_header">Bảo mật 2 chiều</h5>
+                            <p id="two-way-security-control-info_status">Đang bật</p>
+                        </div>
+
+                        <img th:src="@{/images/arrow-right.png}" id="two-way-security-control_btn">
+
+                    </div>
+                </div>
+
+                <div id="security-change-password">
+                    <div id="security-change-password-header" >
+                        <img th:src="@{/images/key.png}" id="security-change-password-header_img">
+                        <h2 id="security-change-password-header_title">Thay đổi mật khẩu</h2>
+                    </div>
+
+                    <div id="security-change-password-body">
+
+                        <p id="security-change-password-body_description">
+                            Sau khi bạn nhập mật khẩu cũ và mật khẩu mới một mã code sẽ được chuyển đến email của bạn
+                        </p>
+
+                        <div id="security-change-password-body-control" onclick="showChangingPasswordForm()">
+
+                            <div id="security-change-password-body-control-info">
+                                <h5 id="security-change-password-body-control-info_header">Mật khẩu</h5>
+                                <p id="security-change-password-body-control-info_status">Thay đổi mật khẩu</p>
+                            </div>
+
+                            <img th:src="@{/images/arrow-right.png}" id="security-change-password-body-control_btn">
+
+                        </div>
+<!--                        <div class="security-change-password-item">-->
+<!--                            <input type="password" class="security-change-password-item_input" placeholder="Mật khẩu cũ">-->
+<!--                            <img th:src="@{/images/view.png}" class="security-change-password-item_img" >-->
+<!--                        </div>-->
+
+<!--                        <div class="security-change-password-item">-->
+<!--                            <input type="password" class="security-change-password-item_input" placeholder="Mật khẩu mới">-->
+<!--                            <img th:src="@{/images/view.png}" class="security-change-password-item_img" >-->
+<!--                        </div>-->
+
+<!--                        <div class="security-change-password-item">-->
+<!--                            <input type="password" class="security-change-password-item_input" placeholder="Gõ lại mật khẩu mới">-->
+<!--                            <img th:src="@{/images/view.png}" class="security-change-password-item_img">-->
+<!--                        </div>-->
+
+<!--                        <div id="security-change-password-body-saving-new-password">-->
+<!--                            <div id="security-change-password-body-saving-new-password-btn">-->
+<!--                                Lưu thay đổi-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div id="security-form">
+            <div id="security-security_overlay">
+
+            </div>
+            <div id="security-form_body" style="display:none">
+                <img th:src="@{/images/close.png}" id="security-form_body-close" onclick="closeSecurityForm()">
+                <div id="two-ways-confirmation-form">
+                    <div id="two-ways-confirmation-form-header">
+                        <h3 id="two-ways-confirmation-form-header_title">Xác nhận bảo mật 2 chiều</h3>
+                        <p id="two-ways-confirmation-form-header_description">Sau khi nhập mật khẩu bảo mật 2 chiều sẽ bật hoặc tắt</p>
+                    </div>
+                    <div id="two-ways-confirmation-form-message">
+                        <img th:src="@{/images/mark.png}" id="two-ways-confirmation-form-message_img" class="d-none">
+                        <span id="two-ways-confirmation-form-message_content" style="color:red;text-align:center;"></span>
+                    </div>
+                    <input type="password" id="two-ways-confirmation-form_password-input" placeholder="Nhập mật khẩu">
+                    <button id="two-ways-confirmation-form_btn" onclick="updateTwoWaysSecurity()">Xác nhận</button>
+                </div>
+
+            </div>
+
+            <div id="changing-password-form" >
+                <img th:src="@{/images/close.png}" id="changing-password-form_close" onclick="closeSecurityForm()">
+                <div id="changing-password-header">
+                    <img th:src="@{/images/key.png}" id="changing-password-header_img">
+                    <h3 id="changing-password-header_title">Thay đổi mật khẩu</h3>
+                </div>
+
+                <div id="changing-password-form-input-list">
+                    <div class="changing-password-form-input-list-message" id="old-password-message-wrap">
+                        <img th:src="@{/images/mark.png}" class="message_img">
+                        <span class="message_content" id="old-password-message">Mật khẩu cũ không được trống</span>
+                    </div>
+                    <div class="changing-password-form-input-list-item">
+                        <input type="password" id="changing-password-form-input-list-item_old-password" class="changing-password-form-input-list-item_input" placeholder="Mật khẩu cũ">
+                        <img th:src="@{/images/view.png}" class="changing-password-form-input-list-item_img">
+                        <img th:src="@{/images/hide.png}" class="hiding-changing-password-form-input-list-item_img d-none">
+                    </div>
+
+                    <div class="changing-password-form-input-list-message" id="new-password-message-wrap">
+                        <img th:src="@{/images/mark.png}" class="message_img">
+                        <span class="message_content" id="new-password-message">Mật khẩu mới không được trống</span>
+                    </div>
+                    <div class="changing-password-form-input-list-item">
+                        <input type="password" class="changing-password-form-input-list-item_input" id="changing-password-form-input-list-item_new-password" placeholder="Mật khẩu mới">
+                        <img th:src="@{/images/view.png}" class="changing-password-form-input-list-item_img">
+                        <img th:src="@{/images/hide.png}" class="hiding-changing-password-form-input-list-item_img d-none">
+                    </div>
+
+                    <div class="changing-password-form-input-list-message" id="retype-password-message-wrap">
+                        <img th:src="@{/images/mark.png}" class="message_img">
+                        <span class="message_content" id="retype-password-message">Mật khẩu nhập lại không được trống</span>
+                    </div>
+                    <div class="changing-password-form-input-list-item">
+                        <input type="password" class="changing-password-form-input-list-item_input" placeholder="Nhập lại mật khẩu mới" id="changing-password-form-input-list-item_retype-password">
+                        <img th:src="@{/images/view.png}" class="changing-password-form-input-list-item_img">
+                        <img th:src="@{/images/hide.png}" class="hiding-changing-password-form-input-list-item_img d-none">
+                    </div>
+
+                    <button id="changing-password-form-input-list_btn" onclick="changePassword()">Lưu thay đổi</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script th:src="@{/JS/app-for-security-page.js}"></script>
+    <script>
+        let navLinks = document.querySelectorAll(".sidebar-control-item");
+        for (let navLinkItem of navLinks) {
+            navLinkItem.classList.remove("active");
+        }
+
+        document.querySelector("#security-password").classList.add("active");
+
+    </script>
+</body>
+</html>

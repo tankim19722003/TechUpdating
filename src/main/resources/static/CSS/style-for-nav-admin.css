@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+
+#nav {
+    width: 20%;
+    padding: 0px 12px;
+    font-family: "Noto Serif", serif;
+    height:100vh;
+}
+
+#nav-list-icon {
+    width:25px;
+}
+
+.nav-list {
+}
+
+.nav-item {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+#post-mn-list-parent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#nav-list-icon-wrap {
+    text-align: right;
+}
+
+.nav-item-icon {
+    width: 22px;
+    margin: 0px 6px;
+}
+
+#post-mn-list-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.nav-item_link {
+    text-decoration: none;
+    color: black;
+}
+
+#post-mn-list {
+    list-style: none;
+}
+
+.post-mn-list-item {
+    margin: 10px 0px;
+}
+
+.post-mn-list-item_link {
+    text-decoration: none;
+    color:black;
+    padding: 0px 44px;
+}
+
+
+/*end style for nav*/

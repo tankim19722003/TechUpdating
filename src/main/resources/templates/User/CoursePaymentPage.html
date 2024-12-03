@@ -1,72 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" type="text/css" th:href="@{/CSS/common-css.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/CSS/StyleForCoursePayment.css}">
 <head>
     <meta charset="UTF-8">
     <title>Course Payment</title>
 </head>
 <body>
-    <header>
-    <div class="header-left">
-        <img th:src="@{/images/logo.png}" class="header-left_logo">
-        <a th:href="@{/api/v1/dev_updating/show_home_page}" class="header-left_link">Trang chủ</a>
-        <a th:href="@{/api/v1/dev_updating/course/show_course/1}" class="header-left_link">Khóa học</a>
-        <a href="#" class="header-left_link">Liên hệ</a>
+
+<!-- Header  -->
+    <div th:replace="/Fragments/header :: header"></div>
+    <div th:replace="/Fragments/nav :: nav"></div>
+
+    <div class="body">
+      <div class="body_top">
+          <div class="body-left">
+              <img th:src="@{/images/QR.png}" class="body-left_qr">
+              <p class="body-left_bank">Ngân hàng: Sacombank</p>
+              <p class="body-left_bank-account-name">Tên tài khoản: Kim Ngọc Tân</p>
+          </div>
+          <div class="body-right">
+              <h1 class="body-right_title">Thanh toán</h1>
+              <div class="body-right-account-number">
+                  <strong class="body-right-account-number_span">Số tài khoản: </strong> 0328869981
+              </div>
+              <div class="body-right-content">
+                <strong class="body-right-content_span">
+                    Nội dung:
+                </strong>
+                  Tên Tài khoản + 12345
+              </div>
+
+              <div class="body-right-address">
+                <strong class="body-right-address_span">
+                    Địa chỉ:
+                </strong>
+                  <span class="body-right-address_content">Ngân hàng Thương tín Thành phố Hồ Chí Minh</span>
+              </div>
+              <p class="bottom">
+                  <strong>Lưu ý</strong>:  Sau khi chuyển khoản thành công khách hàng vui lòng chờ đợi trong giây  lát để hệ thống xử lí đơn hàng, Liên hệ
+                  chúng tôi nếu chưa nhận được khóa học:<strong>0328869981</strong>  hoặc gmail: <strong>tankim071902@gmail.com</strong>
+              </p>
+          </div>
+      </div>
+
     </div>
 
-    <div class="header-right">
-        <div class="header-right-notify">
-            <div class="header-right-notify_img"></div>
-        </div>
-
-        <div class="header-right-auth">
-
-            <!-- does not login               -->
-            <a href="login-form.html" class="header-right-auth_login">Login</a>
-
-            <!-- Login   -->
-
-            <!--                <div class="header-right-auth-user">-->
-            <!--                    <img th:src="@{/images/user.png}" class="header-right-auth-user_image"/>-->
-            <!--                    <div class="header-right-auth-user_wrap">-->
-            <!--                        <span class="header-right-auth-user_account">tankim1972</span>-->
-            <!--                        <img th:src="@{/images/down.png}" class="header-right-auth-user_down"/>-->
-            <!--                    </div>-->
-            <!--                    &lt;!&ndash; login controller          &ndash;&gt;-->
-            <!--                </div>-->
-        </div>
-    </div>
-</header>
-
-    <div class="vvbn">
-        <div class="body-left">
-            <img th:src="@{/images/QR.png}" class="body-left_qr">
-            <p class="body-left_bank">Ngân hàng: Sacombank</p>
-            <p class="body-left_bank-account-name">Tên tài khoản: Kim Ngọc Tân</p>
-        </div>
-        <div class="body-right">
-            <h1 class="body-right_title">Thanh toán</h1>
-            <div class="body-right-account-number">
-                <span class="body-right-account-number_span">Số tài khoản</span> 0328869981
-            </div>
-            <div class="body-right-content">
-                <span class="body-right-content_span">
-                    Nội dung
-                </span>
-            </div>
-
-            <div class="body-right-address">
-                <span class="body-right-address_span">
-                    Địa chỉ
-                </span>
-                <span class="body-right-address_content">Ngân hàng Thương tín Thành phố Hồ Chí Minh</span>
-            </div>
-
-        </div>
-    </div>
-    <p class="bottom">
-        <strong>Lưu ý</strong>:  Sau khi chuyển khoản thành công khách hàng vui lòng chờ đợi trong giây  lát để hệ thống xử lí đơn hàng, Liên hệ
-        chúng tôi nếu chưa nhận được khóa học:<strong>0328869981</strong>  hoặc gmail: <strong>tankim071902@gmail.com</strong>
-    </p>
+    <script th:src="@{/Js/appforCourse.js}"></script>
+    <script th:src="@{/Js/ScriptForHeader.js}"></script>
 </body>
 </html>

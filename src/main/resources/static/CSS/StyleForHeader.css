@@ -1,0 +1,46 @@
+
+.header-right-auth-user {
+    position: relative;
+    display:none;
+}
+
+.header-right-auth-user_image {
+    width: 38px;
+    max-width: 100%;
+    height: 38px;
+    max-height: 100%;
+    border-radius: 32px;
+}
+
+.show-auth-list {
+   display:block!important;
+}
+
+.header-right-auth-list {
+    position: absolute;
+    width: 200px;
+    top: calc(100% + 5px);
+    list-style: none;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: white;
+    right: 12px;
+    display:none;
+}
+
+.header-right-auth-list-item {
+    padding: 6px 8px;
+    font-size: 1.1rem;
+    font-family: sans-serif;
+    cursor:pointer;
+    text-align:center;
+}
+
+.header-right-auth-list-item:hover {
+   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.header-right-auth-list-item_link {
+    text-decoration: none;
+    color: black;
+}

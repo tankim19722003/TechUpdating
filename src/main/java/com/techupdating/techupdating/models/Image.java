@@ -1,5 +1,6 @@
 package com.techupdating.techupdating.models;
 
+import com.techupdating.techupdating.responses.ImageResponse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,5 +29,10 @@ public class Image {
     @JoinColumn(name = "part_id")
     private Part part;
 
-
+    public ImageResponse toImageResponse() {
+        return ImageResponse.builder()
+                .id(this.id)
+                .urlImage(this.urlImage)
+                .build();
+    }
 }

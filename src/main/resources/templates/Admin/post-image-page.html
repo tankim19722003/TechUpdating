@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Image</title>
+    <link rel="stylesheet" th:href="@{/CSS/style-for-post-image.css}">
+</head>
+<body>
+    <div th:replace="/Fragments/AdminHeader :: admin-header"></div>
+
+    <div id="body">
+
+        <div th:replace="/Fragments/AdminNav :: admin-nav"></div>
+        <div id="content">
+            <div id="post-image-header">
+                <img id="post-image-header_img" th:src="@{/images/post.png}">
+                <h3 id="post-image-header_title" style="text-transform:uppercase">thêm hình ảnh vào bài viết</h3>
+            </div>
+
+            <!--post catelog!-->
+            <div id="post-image-catalog">
+                <div id="post-image-catalog-header">
+                    <img id="post-image-catalog-header_img" th:src="@{/images/category.png}"/>
+                    <h3 id="post-image-catalog-header_title">Danh mục bài viết </h3>
+                </div>
+
+                <div id="post-image-catalog-list">
+                    <div class="post-image-catalog-item">
+                        <label class="post-image-catalog-item-label">Ngôn ngữ </label>
+                        <select class="post-image-catalog-item-select" id="language-select">
+                            <option class="post-image-catalog-item-select_option" disabled selected>Ngôn ngữ </option>
+                        </select>
+                    </div>
+
+                    <div class="post-image-catalog-item">
+                        <label class="post-image-catalog-item-label">Khóa học</label>
+                        <select class="post-image-catalog-item-select" id="course-select">
+                            <option class="post-image-catalog-item-select_option" disabled selected>Khóa học</option>
+
+                        </select>
+                    </div>
+
+                    <div class="post-image-catalog-item">
+                        <label class="post-image-catalog-item-label">Nhóm kiến thức </label>
+                        <select class="post-image-catalog-item-select" id="post-group-select">
+                            <option class="post-image-catalog-item-select_option" selected disabled>Nhóm kiến thức </option>
+
+                        </select>
+                    </div>
+
+                    <div class="post-image-catalog-item">
+                        <label class="post-image-catalog-item-label">Bài Post </label>
+                        <select class="post-image-catalog-item-select" id="post-select">
+                            <option class="post-image-catalog-item-select_option" selected disabled >Bài post</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- post content!-->
+            <div id="post-body">
+                <div id="post-body-part">
+                    <img th:src="@{/images/post.png}" id="post-body-part-img">
+                    <h2 id="post-body-part-title">Nội dung bài viết</h2>
+                </div>
+
+                <!--show it before choose catalog!-->
+                <div style="text-align:center" id="message-before-show-post">
+                    <p id="message" style="margin: 8px 0px;font-family: 'Noto Serif';">Vui lòng chọn danh mục!!</p>
+                </div>
+
+                <div id="post-body-header">
+                    <h3 id="post-body-header_title">PHÂN TÍCH NGÔN NGỮ LẬP TRÌNH JAVA</h3>
+
+                    <div id="post-body-header-short-desciption">
+                        <h3 id="post-body-header-short-desciption_title" class="title">Mô tả ngăn</h3>
+                        <p id="post-body-header-short-description_content" class="content-style">Java đã tồn tại hơn 25 năm và hiện vẫn là một trong những ngôn ngữ lập trình được sử dụng nhiều nhất trên thế giới. Được các công ty lớn
+                            tin dùng, Java đảm bảo tính ổn định và bảo mật cho các ứng dụng quan trọng. Ngoài ra, Java còn là ngôn ngữ đa nền tảng, cho phép bạn
+                            phát triển ứng dụng chạy mượt mà  trên các hệ điều hành khác nhau. Điều này là lợi thế lớn khi bạn muốn tạo ra những.</p>
+                    </div>
+
+                    <div id="post-body-header-image">
+                        <h3 id="post-body-header-image_title" class="title">Ảnh bìa</h3>
+                        <img th:src="@{/images/upload.png}" id="post-body-header-image-adding"/>
+                    </div>
+                </div>
+
+                <div id="post-body-content">
+                    <div class="post-body-content-item">
+                        <div class="post-body-content-item_title title">1. Java Là Ngôn Ngữ Được Sử Dụng Rộng Rãi Và Ổn Định</div>
+                        <div class="post-body-content-image-wrap">
+                            <div class="post-body-content-image-wrap-center">
+                                <img th:src="@{/images/close.png}" class="post-body-content_close">
+                                <img th:src="@{/images/CourseImages/java.png}" class="post-body-content-image"/>
+                            </div>
+                        </div>
+
+                        <p class="content-style post-body-content-body">
+                            Java đã tồn tại hơn 25 năm và hiện vẫn là một trong những ngôn ngữ lập trình được sử dụng nhiều nhất trên thế giới. Được các công ty lớn
+                            tin dùng, Java đảm bảo tính ổn định và bảo mật cho các ứng dụng quan trọng. Ngoài ra, Java còn là ngôn ngữ đa nền tảng, cho phép bạn
+                            phát triển ứng dụng chạy mượt mà  trên các hệ điều hành khác nhau. Điều này là lợi thế lớn khi bạn muốn tạo ra những sản phẩm có thể
+                            phục vụ đa dạng đối tượng người dùng.
+                        </p>
+                    </div>
+
+                    <div class="post-body-content-item">
+                        <div class="post-body-content-item_title title">1. Java Là Ngôn Ngữ Được Sử Dụng Rộng Rãi Và Ổn Định<div>
+                            <div class="post-body-content-image-wrap">
+                               <div class="post-body-content-image-wrap-center">
+                                   <img th:src="@{/images/close.png}" class="post-body-content_close">
+                                   <img th:src="@{/images/CourseImages/dotnet.png}" class="post-body-content-image"/>
+                               </div>
+                            </div>
+
+                            <p class="content-style post-body-content-body">
+                                Java đã tồn tại hơn 25 năm và hiện vẫn là một trong những ngôn ngữ lập trình được sử dụng nhiều nhất trên thế giới. Được các công ty lớn
+                                tin dùng, Java đảm bảo tính ổn định và bảo mật cho các ứng dụng quan trọng. Ngoài ra, Java còn là ngôn ngữ đa nền tảng, cho phép bạn
+                                phát triển ứng dụng chạy mượt mà  trên các hệ điều hành khác nhau. Điều này là lợi thế lớn khi bạn muốn tạo ra những sản phẩm có thể
+                                phục vụ đa dạng đối tượng người dùng.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <dialog id="modal">
+        <h2 id="modal-title">Upload Image</h2>
+       <div id="modal-body">
+           <img src="http://localhost:8080/api/v1/dev_updating/image/uploads/upload.png" id="modal-image-upload">
+           <input type="file" id="modal-input"/>
+       </div>
+        <div id="modal-controller">
+            <button id="cancel" class="btn" onclick="closeModal()">Cancel</button>
+            <button id="save-image" class="btn">Save</button>
+        </div>
+    </dialog>
+
+    <script th:src="@{/JS/app-for-post-image.js}"></script>
+</body>
+</html>

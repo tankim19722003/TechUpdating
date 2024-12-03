@@ -18,5 +18,4 @@ public class AdminLoginDTO {
     @NotNull(message = "Password can not be empty")
     private String password;
 
-
 }

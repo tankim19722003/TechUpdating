@@ -1,5 +1,6 @@
 package com.techupdating.techupdating.dtos;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,13 +13,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserLoginDTO {
 
-    @NotNull(message = "Account can not be empty")
+    @NotEmpty(message = "Account can not be empty")
     private String account;
 
-    @NotNull(message = "Password can not be empty")
+    @NotEmpty(message = "Password can not be empty")
     private String password;
-
-    private String emailCode;
-
 
 }

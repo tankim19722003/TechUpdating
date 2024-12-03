@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Builder
 public class PartDTO {
 
+    private String titlePart;
+
     private String content;
 
     private MultipartFile image;

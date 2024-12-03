@@ -13,6 +13,9 @@ CREATE TABLE user (
 );
 
 
+alter table user add column is_two_ways_enabled boolean;
+
+
 CREATE TABLE role (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -52,6 +55,8 @@ alter table course add column short_description text;
 alter table course add column created_at date;
 alter table course add column updated_at date;
 
+alter TABLE course DROP COLUMN quantity_of_user;
+
 create table user_course(
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id int,
@@ -59,6 +64,8 @@ create table user_course(
     course_id int,
     CONSTRAINT fk_course_user FOREIGN KEY (course_id) references course(id) ON DELETE CASCADE
 );
+
+
 
 alter table user_course add column enroll_date date;
 alter table user_course add column enabled tinyint;
@@ -77,6 +84,7 @@ CREATE TABLE post (
     CONSTRAINT fk_post_course FOREIGN KEY (course_id) REFERENCES course(id) ON DELETE CASCADE
 );
 
+alter table post add column thumbnail varchar(255);
 
 CREATE TABLE comment (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -87,6 +95,9 @@ CREATE TABLE comment (
     content TEXT
 );
 
+alter table comment add column created_at date;
+alter table comment modify column created_at DATETIME;
+
 CREATE TABLE part (
     id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255),
@@ -95,6 +106,9 @@ CREATE TABLE part (
     CONSTRAINT fk_part_post FOREIGN KEY(post_id) REFERENCES post(id) ON DELETE CASCADE
 );
 
+ALTER TABLE part MODIFY title text;
+
+
 CREATE TABLE image (
     id INT PRIMARY KEY AUTO_INCREMENT,
     url_image TEXT,
@@ -102,7 +116,16 @@ CREATE TABLE image (
 	CONSTRAINT fk_image_part FOREIGN KEY(part_id) REFERENCES part(id) ON DELETE CASCADE
 );
 
+create table post_topic(
+	id int auto_increment primary key,
+    topic_name varchar(255),
+    course_id int not null check (course_id > 0),
+    constraint fk_course_post_topic foreign key(course_id) references course(id) on delete cascade
+)
 
+-- add  foreign key to post
+alter table post add column topic_id  int not null;
+alter table post add constraint fk_post_topic foreign key (topic_id) references post_topic(id);
 -- remove the user foreign key in role
 ALTER TABLE role
 DROP FOREIGN KEY fk_role_user;
@@ -118,6 +141,18 @@ create table user_role (
      user_id INT NOT NULL check (user_id > 0),
     CONSTRAINT fk_user_role FOREIGN KEY (user_id) REFERENCES user(id)
 );
+
+CREATE TABLE opt (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL CHECK (user_id > 0),
+    otp INT NOT NULL,
+    is_used BOOLEAN,
+    CONSTRAINT fk_user_otp FOREIGN KEY (user_id)
+        REFERENCES user(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
 
 
 
@@ -158,3 +193,28 @@ INSERT INTO `techupdatingdb2`.`course` (`id`, `course_name`, `language_id`, `ima
 -- create register course
 INSERT INTO `techupdatingdb2`.`user_course` (`id`, `user_id`, `course_id`) VALUES ('1', '1', '1');
 UPDATE `techupdatingdb2`.`user_course` SET `enroll_date` = '2024-01-01', `enabled` = '1' WHERE (`id` = '1');
+
+
+-- insert post only title
+INSERT INTO posts (title)
+VALUES
+  ('Bài 1: Giới thiệu về Java'),
+  ('Bài 2: Cài đặt môi trường phát triển'),
+  ('Bài 3: Cú pháp cơ bản: Biến, kiểu dữ liệu, toán tử'),
+  ('Bài 4: Câu lệnh điều khiển: if-else, switch-case, vòng lặp'),
+  ('Bài 5: Mảng và các thao tác với mảng'),
+  ('Bài 6: Khái niệm lớp và đối tượng'),
+  ('Bài 7: Tính đóng gói (Encapsulation)'),
+  ('Bài 8: Kế thừa (Inheritance)'),
+  ('Bài 9: Đa hình (Polymorphism)'),
+  ('Bài 10: Lớp trừu tượng (Abstract class) và giao diện (Interface)'),
+  ('Bài 11: Chuỗi (String)'),
+  ('Bài 12: Collection: List, Set, Map'),
+  ('Bài 13: Các thuật toán sắp xếp và tìm kiếm cơ bản'),
+  ('Bài 14: Xử lý ngoại lệ: try-catch-finally'),
+  ('Bài 15: Đọc ghi file'),
+  ('Bài 16: Stream'),
+  ('Bài 17: Đa luồng (Multithreading)'),
+  ('Bài 18: Lambda expression'),
+  ('Bài 19: Stream API'),
+  ('Bài 20: JDBC (Kết nối cơ sở dữ liệu)');

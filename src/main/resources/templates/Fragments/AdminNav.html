@@ -1,0 +1,47 @@
+<nav id="nav" th:fragment="admin-nav">
+        <link rel="stylesheet" th:href="@{/CSS/style-for-nav-admin.css}" />
+        <div id="nav-list-icon-wrap">
+            <img th:src="@{/images/list.png}" id="nav-list-icon">
+        </div>
+
+        <ul id="nav-list">
+            <li class="nav-item">
+
+                <img th:src="@{/images/home.png}" class="nav-item-icon">
+                <a href="" class="nav-item_link">Home</a>
+            </li>
+
+            <li class="nav-item">
+                <img th:src="@{/images/multiple-users.png}" class="nav-item-icon">
+                <a href="" class="nav-item_link active">User Management</a>
+            </li>
+
+            <li class="nav-item" id="post-mn-list-wrap">
+                <div id="post-mn-list-parent">
+                    <img th:src="@{/images/post-mg.png}" class="nav-item-icon">
+                    <a href="#" class="nav-item_link">Post Management </a>
+                </div>
+                <ul id="post-mn-list">
+                    <li class="post-mn-list-item">
+                        <a href="#" class="post-mn-list-item_link">View posts</a>
+                    </li>
+
+                    <li class="post-mn-list-item">
+                        <a
+                           th:href="@{/api/v1/dev_updating/post/show-post-creating}"
+                           class="post-mn-list-item_link">
+                            Post creation
+                        </a>
+                    </li>
+
+                    <li class="post-mn-list-item">
+                        <a href="#"  class="post-mn-list-item_link">Post updating</a>
+                    </li>
+
+                    <li class="post-mn-list-item">
+                        <a  th:href="@{/api/v1/dev_updating/post/show_post_image_adding}"  class="post-mn-list-item_link">Post image</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+</nav>

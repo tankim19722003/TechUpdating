@@ -23,4 +23,9 @@ CourseRegistrationRepository extends JpaRepository<CourseRegistration, Integer> 
             @Param("userId") int userId,
             @Param("courseId") int courseId
     );
+
+    @Query("Select count(cr) from CourseRegistration cr where cr.course.id = :courseId and cr.enabled = true")
+    int getQuantityUserRegistered(
+            @Param("courseId") int courseId
+    );
 }

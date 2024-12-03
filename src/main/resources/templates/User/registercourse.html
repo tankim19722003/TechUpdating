@@ -6,40 +6,12 @@
     <title>Đăng kí khóa học</title>
     <link rel="stylesheet" type="text/css" th:href="@{/CSS/common-css.css}">
     <link rel="stylesheet" th:href="@{/CSS/styleForRegistrationCourse.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/StyleForHeader.css}">
 </head>
 <body>
 
-<header>
-    <div class="header-left">
-        <img th:src="@{/images/logo.png}" class="header-left_logo">
-        <a th:href="@{/api/v1/dev_updating/show_home_page}" class="header-left_link">Trang chủ</a>
-        <a th:href="@{/api/v1/dev_updating/course/show_course/1}" class="header-left_link">Khóa học</a>
-        <a href="#" class="header-left_link">Liên hệ</a>
-    </div>
-
-    <div class="header-right">
-        <div class="header-right-notify">
-            <div class="header-right-notify_img"></div>
-        </div>
-
-        <div class="header-right-auth">
-
-            <!-- does not login               -->
-            <a href="login-form.html" class="header-right-auth_login">Login</a>
-
-            <!-- Login   -->
-
-            <!--                <div class="header-right-auth-user">-->
-            <!--                    <img th:src="@{/images/user.png}" class="header-right-auth-user_image"/>-->
-            <!--                    <div class="header-right-auth-user_wrap">-->
-            <!--                        <span class="header-right-auth-user_account">tankim1972</span>-->
-            <!--                        <img th:src="@{/images/down.png}" class="header-right-auth-user_down"/>-->
-            <!--                    </div>-->
-            <!--                    &lt;!&ndash; login controller          &ndash;&gt;-->
-            <!--                </div>-->
-        </div>
-    </div>
-</header>
+    <!-- Header  -->
+    <div th:replace="/Fragments/header :: header"></div>
 
     <nav>
         <div class="nav">
@@ -89,6 +61,6 @@
 
 <span th:text="${courseId}"></span>
 </body>
-<script th:src = "@{/JS/common.js}"></script>
+    <script th:src = "@{/JS/common.js}"></script>
 </body>
 </html>

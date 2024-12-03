@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/StyleForHeader.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/common-css.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/CSS/StyleForUserInfoPage.css}">
+    <title>User info page</title>
+</head>
+<body>
+
+    <div id="wrap">
+        <div th:replace="/Fragments/sidebar-info :: sidebar-info"></div>
+
+        <div id="body">
+            <h2 id="body_title">Thông tin cá nhân</h2>
+            <p id="body_review">Xem thông tin cá nhân, chỉnh sửa thông tin người dùng </p>
+            <div id="body-avatar">
+              <div id="body-avatar-body"
+                   th:style="'background-image: url(\'' + @{'http://localhost:8080/api/v1/dev_updating/image/avatar/' + ${userInforResponse.avatar}} + '\'); background-size: contain;background-position: center;'" onclick="showFormUpdateAvatar()" >
+<!--                  <div id="body-avatar-wrap">-->
+<!--'                      <img th:src="@{'http://localhost:8080/api/v1/dev_updating/image/avatar/' + ${userInforResponse.avatar}}" id="body-avatar_image" onclick="showFormUpdateAvatar()"/>-->
+<!--'                  </div>-->
+                  <img th:src="@{/images/plus-blue.png}" id="body-avatar_update-avatar">
+              </div>
+            </div>
+
+           <div id="body-info-wrap">
+               <ul id="body-info">
+                   <li class="body-info-item">
+                       <div class="body-info-item-content">
+                           <p class="body-info-item-content_title">Họ và tên</p>
+                           <p class="body-info-item-content_body" th:text="${userInforResponse.fullname}" id="fullname">Kim Ngọc Tân</p>
+                       </div>
+                       <img th:src="@{/images/pencil.png}" class="body-info-item_modify-icon" onclick="showFullNameUpdatingForm()">
+                   </li>
+
+                   <li class="body-info-item">
+                       <div class="body-info-item-content">
+                           <p class="body-info-item-content_title">Tài khoản</p>
+                           <p class="body-info-item-content_body" th:text="${userInforResponse.account}" >tankim1972@gmail.com</p>
+                       </div>
+                   </li>
+
+                   <li class="body-info-item">
+                       <div class="body-info-item-content">
+                           <p class="body-info-item-content_title">Gmail</p>
+                           <p class="body-info-item-content_body" th:text="${userInforResponse.email}" id="email">tankim1972@gmail.com</p>
+                       </div>
+                       <img th:src="@{/images/pencil.png}" class="body-info-item_modify-icon" onclick="showGmailUpdatingForm()">
+                   </li>
+               </ul>
+           </div>
+        </div>
+
+        <div id="update">
+            <div id="overlay"></div>
+            <div id="update-body">
+                <div class="update-item" id="fullname-form">
+                    <img th:src="@{/images/close.png}" class="close-update-form">
+                    <h1 class="update-item_header">Cập nhật tên của bạn</h1>
+                    <p class="update-item_description">
+                        Tên sẽ được dùng trong các bình luận và hiện thị trong thông tin tài khoản của bạn
+                    </p>
+
+                    <div class="update-item-form">
+                        <label class="update-item-form_label">
+                            Họ và tên
+                        </label>
+                        <input class="update-item-form_input" id="fullname-input"/>
+                    </div>
+
+                    <button class="update-form-item_button" onclick="updateFullname()">Lưu thay đổi</button>
+                </div>
+
+                <div class="update-item" id="gmail-form">
+                    <img th:src="@{/images/close.png}" class="close-update-form">
+                    <h1 class="update-item_header">Cập nhật email của bạn</h1>
+                    <p class="update-item_description">
+                        Email sẽ được dùng để xác thực 2 chiều, nhận các thông tin từ admin
+                    </p>
+
+                    <div class="update-item-form">
+                        <label class="update-item-form_label">
+                            Email
+                        </label>
+                        <input class="update-item-form_input" id="email-input"/>
+                    </div>
+
+                    <button class="update-form-item_button" onclick="updateEmail()">Lưu thay đổi</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="form-update-avatar">
+        <div id="overlay-upload-avatar">
+
+        </div>
+
+        <div id="form-update-avatar-body">
+
+            <div id="update-avatar-header">
+                <h3 id="update-avatar-header_title">Thay đổi avatar</h3>
+                <p id="update-avatar-header_description">Ảnh đại diện giúp mọi người dễ dàng nhận biết  hơn qua các bài viết, bình luận và tin nhắn</p>
+            </div>
+
+            <form id="update-avatar-body" method="POST" th:action="@{'http://localhost:8080/api/v1/dev_updating/image/update_avatar/' + ${userInforResponse.id}}" enctype="multipart/form-data">
+                <img th:src="@{/images/close.png}" id="update-avatar-body_close-icon" onclick="closeUpdatingAvatarForm()"/>
+                <img th:src="@{'http://localhost:8080/api/v1/dev_updating/image/avatar/' + ${userInforResponse.avatar}}"  id="update-avatar-body_img" >
+                <input name="file" type="file" id="update-avatar-body_input" accept="image/*"/>
+
+                <div id="update-avatar-footer">
+                    <div id="update-avatar-footer_cancle-btn" class="btn" onclick="closeUpdatingAvatarForm()">Hủy</div>
+                    <button id="update-avatar-footer-save-btn" class="btn" type="submit">Lưu</button>
+
+                </div>
+            </form>
+
+
+        </div>
+
+    </div>
+
+    <script th:src="@{/JS/appForUserInfoPage.js}"></script>
+
+    <script>
+
+    </script>
+</body>
+</html>

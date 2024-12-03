@@ -7,66 +7,38 @@
     <title>Khóa học</title>
 </head>
 <body>
-    <header>
-        <div class="header-left">
-            <img th:src="@{/images/logo.png}" class="header-left_logo">
-            <a th:href="@{/api/v1/dev_updating/show_home_page}" class="header-left_link">Trang chủ</a>
-            <a th:href="@{/api/v1/dev_updating/course/show_course/1}" class="header-left_link">Khóa học</a>
-            <a href="#" class="header-left_link">Liên hệ</a>
-        </div>
+    <!-- Header  -->
+    <div th:replace="/Fragments/header :: header"></div>
 
-        <div class="header-right">
-            <div class="header-right-notify">
-                <div class="header-right-notify_img"></div>
-            </div>
+    <div th:replace="/Fragments/nav :: nav"></div>
 
-            <div class="header-right-auth">
 
-                <!-- does not login               -->
-                <a href="login-form.html" class="header-right-auth_login">Login</a>
-
-                <!-- Login   -->
-
-                <!--                <div class="header-right-auth-user">-->
-                <!--                    <img th:src="@{/images/user.png}" class="header-right-auth-user_image"/>-->
-                <!--                    <div class="header-right-auth-user_wrap">-->
-                <!--                        <span class="header-right-auth-user_account">tankim1972</span>-->
-                <!--                        <img th:src="@{/images/down.png}" class="header-right-auth-user_down"/>-->
-                <!--                    </div>-->
-                <!--                    &lt;!&ndash; login controller          &ndash;&gt;-->
-                <!--                </div>-->
-            </div>
-        </div>
-    </header>
-    <nav>
-        <div class="nav">
-            <ul class="nav-course">
-
-<!--               <li class="nav-course_item">Java</li>-->
-<!--                <li class="nav-course_item">PHP</li>-->
-<!--                <li class="nav-course_item">Javascript</li>-->
-<!--                <li class="nav-course_item">.Net</li>-->
-<!--                <li class="nav-course_item">ReactJS</li>-->
-
-            </ul>
-        </div>
-    </nav>
+    </d>
 
     <div class="body">
+        <h3 id="message" style= "font-size: 1.4rem;text-align: center;"></h3>
         <div class="course">
 
+            <h2 style="font-size: 1.3rem;" th:if="${#lists.size(courses) < 1}">
+                Chưa có bất kì khóa học nào!!
+            </h2>
+            <div th:each="courseItem : ${courses}" class="course-item"
+                 th:onclick="'showCourse(' + ${courseItem.courseId} + ')'">
+                <div class="course-item_body">
+                        <img src="/images/frontend/bootstrap.jpeg" class="course-item_image">
+                        <h4 class="course-item_title" th:text="${courseItem.courseName}"></h4>
+                        <p class="course-item_short_description" th:text="${courseItem.shortDescription}">${courseItem.short_description}</p>
+                        <div class="course-item-footer">
+                            <div class="course-item-footer-user">
+                                <img src="/images/user.png" class="course-item-footer-user_image">
+                                <span class="course-item-footer-user_quantity"  th:text="${courseItem.quantityOfUser}">${courseItem.quantity_of_user}</span>
+                            </div>
+
+                        <p class="course-item-footer_price" th:text="${courseItem.price}">${courseItem.price} VND</p>
+                    </div>
+                </div>
+            </div>
         </div>
-
-<!--        <div class="pagination">-->
-<!--            <ul class="pagination-list">-->
-<!--                <li style="font-family: monospace;font-size: 1.1rem;font-weight: 400; cursor:pointer">Previous</li>-->
-<!--                <li class="pagination-list_item">1</li>-->
-<!--                <li class="pagination-list_item">2</li>-->
-<!--                <li class="pagination-list_item">3</li>-->
-<!--                <li style="font-family: monospace;font-size: 1.1rem;font-weight: 400;cursor:pointer">Next</li>-->
-
-<!--            </ul>-->
-<!--        </div>-->
     </div>
     <script th:src="@{/Js/appforCourse.js}"></script>
 </body>

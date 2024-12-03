@@ -5,6 +5,9 @@
     padding:0;
 }
 
+#hide-password {
+    display:none;
+}
 .hide {
     display:none;
 }
@@ -22,6 +25,7 @@
     color: red;
     font-size: 0.9rem;
     padding: 0px 8px;
+    font-family: math;
 }
 
 .error-wrap_header,
@@ -84,7 +88,7 @@
     position:relative;
 }
 
-#show-password {
+#show-password, #hide-password {
     height: 15px;
     position: absolute;
     top: 50%;

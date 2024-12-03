@@ -100,15 +100,20 @@ header {
 .body-introduce_web-name,
 .body-introduce_slogan {
     color:white;
+    font-family: monospace;
+    font-weight: bold;
 }
 
 .body-introduce_web-name {
     font-size: 3.2rem;
+    text-shadow: 7px 1px 2px black;
 }
 
 .body-introduce_slogan {
     letter-spacing: 1.2px;
     font-family: sans-serif;
+    text-shadow: 7px 1px 2px black;
+
 }
 
 .body-introduce-search {

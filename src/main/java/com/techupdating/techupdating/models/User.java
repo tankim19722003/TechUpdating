@@ -1,6 +1,9 @@
 package com.techupdating.techupdating.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.techupdating.techupdating.responses.UserInfoResponse;
+import com.techupdating.techupdating.responses.UserLoginResponse;
+import com.techupdating.techupdating.responses.UserResponse;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,13 +37,39 @@ public class User{
     @Column(name = "email")
     private String email;
 
+    @Column(name = "avatar")
+    private String avatar;
+
     @Column(name="enabled")
     private boolean enabled;
 
-//    @OneToMany(mappedBy = "user", cascade = {
-//            CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
-//    })
-//    @JsonManagedReference
+    @Column(name = "is_two_ways_enabled")
+    private Boolean isTwoWaysEnabled;
+
+    public static UserLoginResponse toUserLoginResponse(User user) {
+
+        return UserLoginResponse.builder()
+                .id(user.getId())
+                .fullname(user.getFullname())
+                .avatar(user.getAvatar())
+                .account(user.getAccount())
+                .email(user.getEmail())
+                .isTwoWaysSecurityEnabled(user.isTwoWaysEnabled)
+                .build();
+
+    }
+
+    public static UserInfoResponse toUserInfoResponse(User user) {
+
+        return UserInfoResponse.builder()
+                .id(user.getId())
+                .fullname(user.getFullname())
+                .avatar(user.getAvatar())
+                .account(user.getAccount())
+                .email(user.getEmail())
+                .build();
+
+    }
 
     @ManyToMany( fetch = FetchType.LAZY,
             cascade = {
@@ -58,6 +87,10 @@ public class User{
             CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
     })
     private List<Post> posts;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Comment> comments;
 
 
     @ManyToMany(fetch = FetchType.EAGER,
@@ -78,8 +111,8 @@ public class User{
                 ", account='" + account + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", enabled=" + enabled +
                 '}';
     }
-
-
 }

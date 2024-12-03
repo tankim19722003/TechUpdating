@@ -1,0 +1,319 @@
+
+* {
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+.d-none {
+    display:none;
+}
+
+.d-block {
+    display:block;
+}
+#body {
+    padding: 8px 32px;
+}
+#security-header {
+    font-family: 'Ysabeau', sans-serif;
+    font-size: 1.2rem;
+}
+
+#security-header_header {
+ font-size: 1.6rem;
+}
+
+#security-header_intro {
+
+}
+
+#security-body {
+    margin: 8px 0px;
+}
+
+
+/* style for 2 ways security*/
+#two-way-security  {
+    margin:32px 0px;
+}
+
+#two-way-security-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#two-way-security-header_img {
+    width:20px;
+}
+
+#two-way-security-header_title {
+    font-size: 1.2rem;
+    margin: 0px 8px;
+    font-family: 'Ysabeau', sans-serif;
+}
+
+#security-change-password-body_description,
+#two-way-security_description {
+    font-family: 'Ysabeau', sans-serif;
+    max-width: 100%;
+    /* padding-left: 28px; */
+    margin: 12px 0px;
+}
+
+#security-change-password-body-control,
+#two-way-security-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 0.4px solid #ececec;
+    cursor: pointer;
+    font-family: 'Ysabeau', sans-serif;
+    margin: 16px 0px 32px 0px;
+}
+
+#two-way-security-control-info {
+
+}
+
+#two-way-security-control-info_header {
+
+}
+
+#security-change-password-body-control-info_status,
+#two-way-security-control-info_status {
+    color: #909090;
+
+}
+
+#security-change-password-body-control_btn,
+#two-way-security-control_btn {
+    height: 20px;
+}
+
+
+
+/*end style for 2 way security*/
+
+/*style for changing password*/
+
+#security-change-password {
+    margin: 48px 0px;
+}
+
+#security-change-password-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#security-change-password-header_img {
+    height: 20px;
+    max-height: 100%;
+}
+
+#security-change-password-header_title {
+    margin: 0px 8px;
+    font-size: 1.2rem;
+    font-family: 'Ysabeau', sans-serif;
+}
+
+#security-change-password-body {
+    margin: 16px 0px 32px 0px;
+}
+
+
+/*end style for changing password*/
+
+
+/*style for confirmation and changing password form*/
+#security-form {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    display:none;
+}
+
+#security-form_body-close {
+    width: 25px;
+    position: absolute;
+    top: 8px;
+    right: 20px;
+}
+
+#security-form_body-close:hover{
+    transform: scale(1.04);
+    cursor:pointer;
+}
+#security-security_overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+#changing-password-form,
+#security-form_body {
+    position: relative;
+    z-index: 10;
+    background-color: white;
+    padding: 16px 24px;
+    border-radius: 4px;
+    font-family: 'Ysabeau', sans-serif;
+    display:none;
+}
+
+#two-ways-confirmation-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#two-ways-confirmation-form-message {
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+}
+
+#two-ways-confirmation-form-message_img {
+    width: 15px;
+    margin: 0px 6px;
+}
+
+#two-ways-confirmation-form-message_content {
+
+}
+
+#two-ways-confirmation-form-header {
+    margin: 8px 0px 16px 0px;
+}
+
+#two-ways-confirmation-form-header_title {
+    text-align: center;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
+#two-ways-confirmation-form-header_description {
+    color: #878787;
+}
+
+#two-ways-confirmation-form_password-input {
+    padding: 10px 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin: 12px 0px;
+    font-size: 0.9rem;
+}
+
+#two-ways-confirmation-form_btn {
+    background-color: #54F4C4;
+    border: none;
+    padding: 10px 0px;
+    margin: 12px 0px;
+    border-radius: 20px;
+}
+
+/*end style for confirmation and changing password form*/
+
+/* style for changing password form */
+
+#changing-password-form_close {
+    width: 24px;
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    cursor:pointer;
+}
+
+#changing-password-form_close:hover {
+    transform: scale(1.04);
+}
+#changing-password-form {
+    padding: 24px 32px;
+    width: 400px;
+    max-width: 100%;
+}
+
+#changing-password-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+#changing-password-header_img {
+    height: 18px;
+    margin:0px 6px;
+}
+
+#changing-password-header_title {
+    font-size: 1.4rem;
+
+}
+
+#changing-password-form-input-list {
+
+}
+
+.changing-password-form-input-list-message {
+    margin:6px 0px;
+    display:none;
+}
+.message_img {
+    width:15px;
+}
+
+.message_content {
+    color:red;
+}
+
+.changing-password-form-input-list-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 22px;
+    border: 1px solid #dcdada;
+    width: 100%;
+    padding: 0px 6px;
+    border-radius: 6px;
+
+}
+
+.changing-password-form-input-list-item_input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 8px 6px;
+}
+
+.hiding-changing-password-form-input-list-item_img,
+.changing-password-form-input-list-item_img {
+    height:20px;
+    cursor:pointer;
+}
+
+
+
+#changing-password-form-input-list_btn {
+    margin: 16px 0px;
+    width: 100%;
+    padding: 8px 0px;
+    border: none;
+    background-color: #54F4C4;
+    border-radius: 20px;
+}
+
+/*end style for changing password form*/
